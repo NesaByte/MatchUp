@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity_matchup">
+
+    <TextView
+        android:id="@+id/tv_matchup"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginEnd="212dp"
+        android:layout_marginRight="212dp"
+        android:text="@string/amu_matchup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/et_matchname"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="164dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginRight="112dp"
+        android:hint="@string/hint_matchname"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_amu_addtops"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="224dp"
+        android:text="@string/amu_addtops"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/amu_addbottoms"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="224dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:text="@string/amu_addbottoms"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/btn_amu_cancel"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="80dp"
+
+        android:layout_marginLeft="80dp"
+        android:layout_marginBottom="60dp"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_amu_submit_mu"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@android:color/holo_red_dark"
+
+        />
+
+    <Button
+        android:id="@+id/btn_amu_submit_mu"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="81dp"
+        android:layout_marginRight="81dp"
+        android:layout_marginBottom="60dp"
+        android:text="@string/amu_submit_mu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_amu_cancel" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

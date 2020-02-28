@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/btn_matchUp"
+        android:title="@string/match_up"
+        app:showAsAction="never"
+        />
+
+    <item android:id="@+id/btn_viewInventory"
+        android:title="@string/view_inventory"
+        app:showAsAction="never"
+        />
+
+    <item android:id="@+id/btn_addNewItem"
+        android:title="@string/add_new_item"
+        app:showAsAction="never"
+        />
+
+    <item android:id="@+id/btn_removeItem"
+        android:title="@string/remove_item"
+        app:showAsAction="never"
+        />
+</menu>

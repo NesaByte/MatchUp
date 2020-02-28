@@ -1,0 +1,52 @@
+<resources>
+    <!-- activity_main -->
+    <string name="app_name">MATCH IT UP</string>
+    <string name="match_up">Match Up</string>
+    <string name="view_inventory">View Inventory</string>
+    <string name="add_new_item">Add New Item</string>
+    <string name="remove_item">Remove Item</string>
+    <string name="icon">icon</string>
+
+    <!-- activity_addnewintem -->
+    <string name="item_name">Item Name</string>
+    <string name="item_tag_s">Item Tag(s)</string>
+    <string name="let_s_add_more_items">Let\'s add more items</string>
+    <string name="add_item">Add Item</string>
+    <string name="item_tag">Item Tag</string>
+    <string name="add_now">Add Now</string>
+    <string name="add_now_please">Add more items!</string>
+    <string name="amu_matchup"> Let\'s make a new match up!</string>
+    <string name="hint_matchname"> Name this MatchUp</string>
+    <string name="cancel">Cancel</string>
+    <string name="takepic">Take Picture</string>
+    <string name="upload">Upload</string>
+    <string name="remove">Remove Items</string>
+    <string name="search">Quick Search</string>
+    <string name="todo">DO ME</string>
+    <string name="amu_addbottoms">ADD BOTTOMS</string>
+    <string name="amu_addtops">ADD TOPS</string>
+    <string name="amu_submit_mu">MatchUp!</string>
+
+    <!-- activity_addnewintem -->
+    <string name="t_add_clothing_inventory">Clothing Inventory</string>
+    <string name="t_add_top_or_bottom">Do you want to add top or bottom?</string>
+    <string name="i_add_top">ib_add_top</string>
+    <string name="i_add_bottom">ib_add_bottom</string>
+
+    <!-- dialog_addnewintem -->
+    <string name="t_add_name">Name</string>
+    <string name="t_add_tag">Tag</string>
+    <string name="e_add_name">Name this top</string>
+    <string name="e_add_tag">Give tags for this top</string>
+
+    <!-- dialog_addnewintemBOTTOM -->
+    <string name="t_add_nameB">Name</string>
+    <string name="t_add_tagB">Tag</string>
+    <string name="e_add_Bname">Name this Bottom</string>
+    <string name="e_add_Btag">Give tags for this bottom</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>
