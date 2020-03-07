@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.organizer_v2.SQLiteHelperTOPS;
+
 public class DBManagerTops {
     private Context context;
     private SQLiteDatabase databaseTOPS;

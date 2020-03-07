@@ -7,13 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.example.organizer_v2.db.DBManagerTops;
-import com.example.organizer_v2.db.SQLiteHelperTOPS;
 
 public class activity_addnewitem extends AppCompatActivity {
 
@@ -23,7 +20,7 @@ public class activity_addnewitem extends AppCompatActivity {
     EditText  et_add_name, et_add_tag;
     //SQLiteHelperTOPS sqLiteHelperTOPS = new SQLiteHelperTOPS(this);
     DBManagerTops dbManagerTops = new DBManagerTops(this);
-
+    final int REQUEST_CODE_GALLERY = 999;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +41,16 @@ public class activity_addnewitem extends AppCompatActivity {
         //for the top dialog
         ib_add_top.setOnClickListener(new View.OnClickListener() {
             @Override
+            public void onClick(View v){
+                /*ActivityCompat.requestPermissions(activity_addnewitem.this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        REQUEST_CODE_GALLERY);*/
+                openTOPDialog();
+            }/*
+            @Override
             public void onClick(View v) {
                 openTOPDialog();
-            }
+            }*/
 /*
             try{
                 dbManagerTops.open();
@@ -67,8 +71,10 @@ public class activity_addnewitem extends AppCompatActivity {
         });
     }
     public void openTOPDialog(){
-        dialog_addnewitem exampleDialog = new dialog_addnewitem();
-        exampleDialog.show(getSupportFragmentManager(), "example dialog");
+        Intent intent = new Intent(this, activity__addtops.class);
+        startActivity(intent);
+        //dialog_addnewitem exampleDialog = new dialog_addnewitem();
+        //exampleDialog.show(getSupportFragmentManager(), "example dialog");
     }
     public void openBOTTOMDialog(){
         dialog_addnewitemBottom tempDialog = new dialog_addnewitemBottom();
