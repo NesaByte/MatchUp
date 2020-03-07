@@ -12,13 +12,17 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.organizer_v2.db.DBManagerTops;
+import com.example.organizer_v2.db.SQLiteHelperTOPS;
+
 public class activity_addnewitem extends AppCompatActivity {
 
     //TODO: DB here
     //TextView  tv_add_clothing_inventory, tv_add_top_or_bottom;
     ImageButton ib_add_top, ib_add_bottom;
     EditText  et_add_name, et_add_tag;
-
+    //SQLiteHelperTOPS sqLiteHelperTOPS = new SQLiteHelperTOPS(this);
+    DBManagerTops dbManagerTops = new DBManagerTops(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,15 @@ public class activity_addnewitem extends AppCompatActivity {
             public void onClick(View v) {
                 openTOPDialog();
             }
+/*
+            try{
+                dbManagerTops.open();
+                final String TOPSNAME = et_add_name.getText().toString().trim();
+                final String TOPSTASG = et_add_tag.getText().toString().trim();
+                String query = "SELECT * FROM TOPS where TOPSNAME LIKE ? '"+new String[] { TOPSNAME }+"' ";
+                if
+            }*/
+
         });
 
         //for the bottom dialog

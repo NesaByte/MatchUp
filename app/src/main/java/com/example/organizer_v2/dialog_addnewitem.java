@@ -12,12 +12,19 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.example.organizer_v2.db.DBManagerTops;
+import com.example.organizer_v2.db.SQLiteHelperTOPS;
 
-import static android.app.Activity.RESULT_OK;
+
+//import static android.app.Activity.RESULT_OK;
 public class dialog_addnewitem extends AppCompatDialogFragment {
 
-    private ImageButton ib_add_top, ib_add_bottom;
+    //private ImageButton ib_add_top, ib_add_bottom;
     private EditText et_add_name, et_add_tag;
+    //DBManagerTops dbManagerTops = new DBManagerTops(this);
+
+    //SQLiteHelperTOPS sqLiteHelperTOPS;
+
 
     public Dialog onCreateDialog(Bundle savedInstanceState){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -30,16 +37,29 @@ public class dialog_addnewitem extends AppCompatDialogFragment {
         //upload img
         //upload img listener
 
+
+
      builder.setView(view).
              setTitle("Add Top").
              setPositiveButton("Add", new DialogInterface.OnClickListener(){
                  @Override
                  public void onClick(DialogInterface dialogInterface, int i){
                      // for db: AddData();
-                     Toast.makeText(getActivity(), "Successfully Added!", Toast.LENGTH_SHORT).show();
+                     if (et_add_name.length()  == 0 || et_add_tag.length() == 0){
+                         Toast.makeText(getActivity(), "Missing field(s)!", Toast.LENGTH_SHORT).show();
+                     }else{
+                         Toast.makeText(getActivity(), "Successfully Added!", Toast.LENGTH_SHORT).show();
+                     }
+
+
                      dismiss();
+
+
+
                  }
              });
+
+
      return builder.create();
     }
 //for img:    public void onRequestPermissionResult (int requestCode)

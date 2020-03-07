@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/tv_matchup"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"
@@ -61,32 +61,19 @@
 
 
     <Button
-        android:id="@+id/btn_amu_cancel"
-        android:layout_width="130dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="80dp"
-
-        android:layout_marginLeft="80dp"
-        android:layout_marginBottom="60dp"
-        android:text="@string/cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_amu_submit_mu"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@android:color/holo_red_dark"
-
-        />
-
-    <Button
         android:id="@+id/btn_amu_submit_mu"
         android:layout_width="130dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="81dp"
-        android:layout_marginRight="81dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginLeft="140dp"
+        android:layout_marginEnd="141dp"
+        android:layout_marginRight="141dp"
         android:layout_marginBottom="60dp"
         android:text="@string/amu_submit_mu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_amu_cancel" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

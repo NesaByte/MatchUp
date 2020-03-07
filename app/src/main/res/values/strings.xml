@@ -23,12 +23,12 @@
     <string name="remove">Remove Items</string>
     <string name="search">Quick Search</string>
     <string name="todo">DO ME</string>
-    <string name="amu_addbottoms">ADD BOTTOMS</string>
-    <string name="amu_addtops">ADD TOPS</string>
+    <string name="amu_addbottoms">ADD A BOTTOM</string>
+    <string name="amu_addtops">ADD A TOP</string>
     <string name="amu_submit_mu">MatchUp!</string>
 
     <!-- activity_addnewintem -->
-    <string name="t_add_clothing_inventory">Clothing Inventory</string>
+    <string name="t_add_clothing_inventory">Add Inventory</string>
     <string name="t_add_top_or_bottom">Do you want to add top or bottom?</string>
     <string name="i_add_top">ib_add_top</string>
     <string name="i_add_bottom">ib_add_bottom</string>
@@ -47,6 +47,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- activity_viewinventory -->
+    <string name="t_view_inventory">View Inventory</string>
+    <string name="t_view_top_or_bottom">Do you want to view top or bottom?</string>
+    <string name="i_view_top">ib_view_top</string>
+    <string name="i_view_bottom">ib_view_bottom</string>
 
 
 </resources>
