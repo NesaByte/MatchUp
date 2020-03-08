@@ -1,5 +1,6 @@
 package com.example.organizer_v2;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,31 +9,40 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     //main menu = MATCH UP
-    private ImageView img;
+    /*private ImageView img;
     private Button btn_matchUp;
     private Button btn_viewInventory;
     private Button btn_addNewItem;
-    private Button btn_removeItem;
+    private Button btn_removeItem;*/
+    public static SQLiteHelperTOPS sqLiteHelperTOPS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        findViewById(R.id.btn_matchUp).setOnClickListener(this);
+        findViewById(R.id.btn_viewInventory).setOnClickListener(this);
+        findViewById(R.id.btn_addNewItem).setOnClickListener(this);
+        findViewById(R.id.btn_removeItem).setOnClickListener(this);
         //assigning the buttons with their id
-        btn_matchUp       = (Button) findViewById(R.id.btn_matchUp);
-        btn_viewInventory = (Button) findViewById(R.id.btn_viewInventory);
-        btn_addNewItem    = (Button) findViewById(R.id.btn_addNewItem);
-        btn_removeItem    = (Button) findViewById(R.id.btn_removeItem);
+        /*
+        btn_matchUp       = findViewById(R.id.btn_matchUp);
+        btn_viewInventory = findViewById(R.id.btn_viewInventory);
+        btn_addNewItem    = findViewById(R.id.btn_addNewItem);
+        btn_removeItem    = findViewById(R.id.btn_removeItem);
+        img               = findViewById(R.id.imageView);*/
 
-        //listeners
+        /*//listeners
         btn_matchUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, activity_matchup.class));
+                Intent intent = new Intent( MainActivity.this, activity_matchup.class);
+                startActivity(intent);
+                //startActivity(new Intent(MainActivity.this, activity_matchup.class));
             }
         });
 
@@ -57,25 +67,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        img = (ImageView) findViewById(R.id.imageView);
-
+*/
     }
 
-/*    private void startMatchUp(){
-        Intent intent = new Intent( this, MatchUp.class);
-        startActivity(intent);
+    @Override
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.btn_addNewItem:
+                startActivity(new Intent(this, activity_addnewitem.class));
+                break;
+
+            case R.id.btn_matchUp:
+                startActivity(new Intent(this, activity_matchup.class));
+                break;
+
+            case R.id.btn_removeItem:
+                startActivity(new Intent(this, activity_removeitem.class));
+                break;
+
+            case R.id.btn_viewInventory:
+                startActivity(new Intent(this, activity_viewinventory.class));
+                break;
+        }
     }
 
-    private void startViewInventory(){
-        Intent intent = new Intent( this, ViewInventory.class);
-        startActivity(intent);
-    }
-    private void startAddNewItem(){
-        Intent intent = new Intent( this, AddNewItem.class);
-        startActivity(intent);
-    }
-    private void startRemoveItem(){
-        Intent intent = new Intent( this, RemoveItem.class);
-        startActivity(intent);
-    }*/
 }

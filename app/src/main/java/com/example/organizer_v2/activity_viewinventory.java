@@ -1,5 +1,6 @@
 package com.example.organizer_v2;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 //import androidx.rec
 
@@ -15,11 +16,11 @@ import android.widget.ImageButton;
 public class activity_viewinventory extends AppCompatActivity {
 
     ImageButton ib_view_top, ib_view_bottom;
-    EditText et_view_name, et_view_tag;
+    //EditText et_view_name, et_view_tag;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewinventory);
 
@@ -28,34 +29,21 @@ public class activity_viewinventory extends AppCompatActivity {
         //et_view_name =    (EditText) findViewById(R.id.et_view_name);
         //et_view_tag  =    (EditText) findViewById(R.id.et_view_tag);
 
-        ib_view_top =    (ImageButton) findViewById(R.id.ib_view_top);
-        ib_view_bottom = (ImageButton) findViewById(R.id.ib_view_bottom);
+        ib_view_top =     findViewById(R.id.ib_view_top);
+        ib_view_bottom =  findViewById(R.id.ib_view_bottom);
 
         ib_view_top.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openTOPDialog();
+                startActivity(new Intent(activity_viewinventory.this, secondactivity_viewtop.class));
             }
         });
 
-        ib_view_bottom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openBOTTOMDialog();
-            }
-        });
-    }
-
-    public void openTOPDialog(){
-        dialog_viewtop exampleDialog = new dialog_viewtop();
-        exampleDialog.show(getSupportFragmentManager(), "example dialog");
-    }
-    public void openBOTTOMDialog(){
-        dialog_viewbottom tempDialog = new dialog_viewbottom();
-        tempDialog.show(getSupportFragmentManager(), "example dialog");
     }
 
 
+
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -98,5 +86,5 @@ public class activity_viewinventory extends AppCompatActivity {
     private void actionRemoveItem(){
         Intent i = new Intent(activity_viewinventory.this, activity_removeitem.class);
         startActivity(i);
-    }
+    }*/
 }

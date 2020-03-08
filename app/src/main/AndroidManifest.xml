@@ -12,8 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".secondactivity_addtop"></activity>
-        <activity android:name=".activity__addtops" />
+        <activity android:name=".secondactivity_viewtop"></activity>
+        <activity android:name=".secondactivity_addtop" />
         <activity android:name=".activity_addnewitem" />
         <activity android:name=".activity_viewinventory" />
         <activity android:name=".activity_removeitem" />

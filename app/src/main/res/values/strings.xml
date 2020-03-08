@@ -54,5 +54,9 @@
     <string name="i_view_top">ib_view_top</string>
     <string name="i_view_bottom">ib_view_bottom</string>
 
+    <string name="iv_photo">picture</string>
+    <string name="close">close</string>
 
+
+    <string name="reupload_pic">Click icon to upload new photo</string>
 </resources>

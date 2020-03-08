@@ -4,12 +4,13 @@
 
 
     <SearchView
+        android:id="@+id/sv_searchview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:queryHint="Quick Search" />
 
     <ListView
-        android:id="@+id/lv_items"
+        android:id="@+id/lv_listview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.55" />

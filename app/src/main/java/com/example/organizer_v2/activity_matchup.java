@@ -13,7 +13,7 @@ import android.widget.ImageButton;
 
 public class activity_matchup extends AppCompatActivity {
 
-
+/*
 
     //ImageButton ib_view_top, ib_view_bottom;
     //EditText et_view_name, et_view_tag;
@@ -32,29 +32,9 @@ public class activity_matchup extends AppCompatActivity {
         btn_amu_addtops =    (Button) findViewById(R.id.btn_amu_addtops);
         btn_amu_addbottoms = (Button) findViewById(R.id.amu_addbottoms);
 
-        btn_amu_addtops.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openTOPDialog();
-            }
-        });
-
-        btn_amu_addbottoms.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openBOTTOMDialog();
-            }
-        });
     }
 
-    public void openTOPDialog(){
-        dialog_matchuptop exampleDialog = new dialog_matchuptop();
-        exampleDialog.show(getSupportFragmentManager(), "example dialog");
-    }
-    public void openBOTTOMDialog(){
-        dialog_matchupbottom tempDialog = new dialog_matchupbottom();
-        tempDialog.show(getSupportFragmentManager(), "example dialog");
-    }
+
 
 
     @Override

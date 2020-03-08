@@ -1,6 +1,7 @@
 package com.example.organizer_v2;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -22,6 +23,8 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
+import static com.example.organizer_v2.MainActivity.sqLiteHelperTOPS;
+
 
 public class secondactivity_addtop extends AppCompatActivity {
     //ImageButton
@@ -30,10 +33,10 @@ public class secondactivity_addtop extends AppCompatActivity {
     Button btn_addtops_add;
 
     final int REQUEST_CODE_GALLERY = 999;
-    public static SQLiteHelperTOPS sqLiteHelperTOPS;
+    //public static SQLiteHelperTOPS sqLiteHelperTOPS;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secondaddtop);
 
@@ -75,24 +78,6 @@ public class secondactivity_addtop extends AppCompatActivity {
                 }
             }
         });
-        /*btn_addtops_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                    sqLiteHelperTOPS.insertData(
-                            et_add_name.getText().toString().trim(),
-                            et_add_tag.getText().toString().trim(),
-                            imageViewToByte(ib_dialog_view_top));
-                    toastMsg("Added successfully.");
-                    et_add_name.setText("");
-                    et_add_tag.setText("");
-                    ib_dialog_view_top.setImageResource(R.drawable.insert_photos);
-
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-            }
-        });*/
     }
 
     public static byte[] imageViewToByte(ImageView image){
@@ -115,31 +100,12 @@ public class secondactivity_addtop extends AppCompatActivity {
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
-    /*public void onRequestPermissionsResult(int rqstCode, @NonNull String[] permissions, @NonNull int[] grantResults){
-        if(rqstCode == REQUEST_CODE_GALLERY){
-            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                pickImageFromGallery();
-            }else{
-                toastMsg("No permission to access files");
-            }
-            return;
-        }
-        super.onRequestPermissionsResult(rqstCode, permissions, grantResults);
-    */
-
-
 
     public void pickImageFromGallery(){
         Intent gallery = new Intent();
         gallery.setType("image/*");
         gallery.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(gallery, "Select Picture ..."), REQUEST_CODE_GALLERY);
-
-        /*Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select a cute top"), REQUEST_CODE_GALLERY);
-*/
     }
 
     @Override
@@ -164,26 +130,7 @@ public class secondactivity_addtop extends AppCompatActivity {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
-    }/*
-
-    public void onActivityResult(int requestCode, int resultCode, Intent intent){
-        if(requestCode == REQUEST_CODE_GALLERY && requestCode == RESULT_OK){
-            Uri uri = intent.getData();
-            CropImage.activity(uri).setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(1,1).start(this);
-
-        }
-        if(requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
-            CropImage.ActivityResult result = CropImage.getActivityResult(intent);
-            if(resultCode == RESULT_OK){
-                Uri uri = result.getUri();
-                ib_dialog_view_top.setImageURI(uri);
-            }else if(requestCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
-                Exception exception = result.getError();
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, intent);
-    }*/
+    }
 
     private void toastMsg(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();

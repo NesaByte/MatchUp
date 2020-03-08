@@ -1,5 +1,6 @@
 package com.example.organizer_v2;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,28 +11,24 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import com.example.organizer_v2.db.DBManagerTops;
 
 public class activity_addnewitem extends AppCompatActivity {
 
     ImageButton ib_add_top, ib_add_bottom;
     EditText  et_add_name, et_add_tag;
-    //SQLiteHelperTOPS sqLiteHelperTOPS = new SQLiteHelperTOPS(this);
-    //DBManagerTops dbManagerTops = new DBManagerTops(this);
 
-    final int REQUEST_CODE_GALLERY = 999;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addnewitem);
 
         getSupportActionBar().setTitle("Add New Item");
 
-        et_add_name =    (EditText) findViewById(R.id.et_add_name);
-        et_add_tag  =    (EditText) findViewById(R.id.et_add_tag);
+        et_add_name =    findViewById(R.id.et_add_name);
+        et_add_tag  =    findViewById(R.id.et_add_tag);
 
-        ib_add_top =    (ImageButton) findViewById(R.id.ib_add_top);
-        ib_add_bottom = (ImageButton) findViewById(R.id.ib_add_bottom);
+        ib_add_top =     findViewById(R.id.ib_add_top);
+        ib_add_bottom =  findViewById(R.id.ib_add_bottom);
 
 
         ib_add_top.setOnClickListener(new View.OnClickListener() {
@@ -41,23 +38,10 @@ public class activity_addnewitem extends AppCompatActivity {
             }
         });
 
-
-        //for the bottom dialog
-        ib_add_bottom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openBOTTOMDialog();
-            }
-        });
-    }
-
-    public void openBOTTOMDialog(){
-        dialog_addnewitemBottom tempDialog = new dialog_addnewitemBottom();
-        tempDialog.show(getSupportFragmentManager(), "example dialog");
     }
 
 
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -99,5 +83,5 @@ public class activity_addnewitem extends AppCompatActivity {
     private void actionRemoveItem(){
         Intent i = new Intent(activity_addnewitem.this, activity_removeitem.class);
         startActivity(i);
-    }
+    }*/
 }
