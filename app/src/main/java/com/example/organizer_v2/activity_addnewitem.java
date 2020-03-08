@@ -14,20 +14,16 @@ import com.example.organizer_v2.db.DBManagerTops;
 
 public class activity_addnewitem extends AppCompatActivity {
 
-    //TODO: DB here
-    //TextView  tv_add_clothing_inventory, tv_add_top_or_bottom;
     ImageButton ib_add_top, ib_add_bottom;
     EditText  et_add_name, et_add_tag;
     //SQLiteHelperTOPS sqLiteHelperTOPS = new SQLiteHelperTOPS(this);
-    DBManagerTops dbManagerTops = new DBManagerTops(this);
+    //DBManagerTops dbManagerTops = new DBManagerTops(this);
+
     final int REQUEST_CODE_GALLERY = 999;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addnewitem);
-
-        //final Intent intent = new Intent(this, MainActivity.class);
-        //TODO: DB here
 
         getSupportActionBar().setTitle("Add New Item");
 
@@ -38,29 +34,13 @@ public class activity_addnewitem extends AppCompatActivity {
         ib_add_bottom = (ImageButton) findViewById(R.id.ib_add_bottom);
 
 
-        //for the top dialog
         ib_add_top.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                /*ActivityCompat.requestPermissions(activity_addnewitem.this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        REQUEST_CODE_GALLERY);*/
-                openTOPDialog();
-            }/*
-            @Override
             public void onClick(View v) {
-                openTOPDialog();
-            }*/
-/*
-            try{
-                dbManagerTops.open();
-                final String TOPSNAME = et_add_name.getText().toString().trim();
-                final String TOPSTASG = et_add_tag.getText().toString().trim();
-                String query = "SELECT * FROM TOPS where TOPSNAME LIKE ? '"+new String[] { TOPSNAME }+"' ";
-                if
-            }*/
-
+                startActivity(new Intent(activity_addnewitem.this, secondactivity_addtop.class));
+            }
         });
+
 
         //for the bottom dialog
         ib_add_bottom.setOnClickListener(new View.OnClickListener() {
@@ -70,12 +50,7 @@ public class activity_addnewitem extends AppCompatActivity {
             }
         });
     }
-    public void openTOPDialog(){
-        Intent intent = new Intent(this, activity__addtops.class);
-        startActivity(intent);
-        //dialog_addnewitem exampleDialog = new dialog_addnewitem();
-        //exampleDialog.show(getSupportFragmentManager(), "example dialog");
-    }
+
     public void openBOTTOMDialog(){
         dialog_addnewitemBottom tempDialog = new dialog_addnewitemBottom();
         tempDialog.show(getSupportFragmentManager(), "example dialog");

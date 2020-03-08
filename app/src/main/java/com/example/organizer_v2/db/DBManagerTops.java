@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.organizer_v2.SQLiteHelperTOPS;
 
 public class DBManagerTops {
+    /*
     private Context context;
     private SQLiteDatabase databaseTOPS;
     private SQLiteHelperTOPS sqLiteHelperTOPS;
@@ -30,6 +31,6 @@ public class DBManagerTops {
         this.databaseTOPS.insert(SQLiteHelperTOPS.TABLE_NAME_TOPS, null, cv);
     }
 
-
+*/
 
 }

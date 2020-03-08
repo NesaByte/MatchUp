@@ -11,10 +11,13 @@ import androidx.annotation.Nullable;
 public class SQLiteHelperTOPS extends SQLiteOpenHelper {
 
 
-    private static final String TAG = "SQLiteHelper";
+    private static final String TAG = "SQLiteHelperTOPS";
     //public static final String DB_NAME = "TOPS.DB";
 
-    SQLiteHelperTOPS(@Nullable Context context, String name, SQLiteDatabase.CursorFactory cursorFactory, int version){
+    SQLiteHelperTOPS(@Nullable Context context,
+                     String name,
+                     SQLiteDatabase.CursorFactory cursorFactory,
+                     int version){
         super(context, name, cursorFactory, version);
     }
 
@@ -25,7 +28,7 @@ public class SQLiteHelperTOPS extends SQLiteOpenHelper {
 
     public void insertData(String name, String tag, byte[] image){
         SQLiteDatabase db = getWritableDatabase();
-        String sql = "INSERT INTO TOPS.DB VALUES(NULL, ?, ?, ?)";
+        String sql = "INSERT INTO TABLE_NAME VALUES(NULL, ?, ?, ?)";
         SQLiteStatement sqLiteStatement = db.compileStatement(sql);
 
         sqLiteStatement.clearBindings();
@@ -43,7 +46,7 @@ public class SQLiteHelperTOPS extends SQLiteOpenHelper {
 
     public void updateData(String name, String tag, byte[] image, int id){
         SQLiteDatabase db = getWritableDatabase();
-        String sql = "UPDATE TOPS.DB SET name = ?, tag = ?, image = ? WHERE id = ?";
+        String sql = "UPDATE TABLE_NAME SET name = ?, tag = ?, image = ? WHERE id = ?";
         SQLiteStatement sqLiteStatement = db.compileStatement(sql);
 
         sqLiteStatement.clearBindings();
@@ -58,7 +61,7 @@ public class SQLiteHelperTOPS extends SQLiteOpenHelper {
 
     public void deleteData(int id){
         SQLiteDatabase db = getWritableDatabase();
-        String sql = "DELETE FROM TOPS.DB WHERE id = ?";
+        String sql = "DELETE FROM TABLE_NAME WHERE id = ?";
         SQLiteStatement sqLiteStatement = db.compileStatement(sql);
 
         sqLiteStatement.clearBindings();
