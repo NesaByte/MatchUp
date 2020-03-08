@@ -101,11 +101,19 @@ public class secondactivity_viewtop extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         if(which == 0){
                             Cursor c = sqLiteHelperTOPS.getData("SELECT id FROM TABLE_NAME");
+                            ArrayList<Integer> arrID = new ArrayList<>();
+                            while (c.moveToNext()) {
+                                arrID.add(c.getInt(0));
+                            }
+                            showDialogRead(secondactivity_viewtop.this, arrID.get(position));
+
+                            /*
+                            Cursor c = sqLiteHelperTOPS.getData("SELECT id FROM TABLE_NAME");
                             ArrayList<Integer> arrayList_id = new ArrayList<>();
                             while(c.moveToNext()){
                                 arrayList_id.add(c.getInt(0));
                             }
-                            showDialogRead(secondactivity_viewtop.this, arrayList_id.get(position));
+                            showDialogRead(secondactivity_viewtop.this, arrayList_id.get(position));*/
                         }
 
                         if(which == 1){
@@ -139,6 +147,41 @@ public class secondactivity_viewtop extends AppCompatActivity {
         dialogRead.setContentView(R.layout.dialog_viewtop_read);
         dialogRead.setTitle("Read ...");
 
+        final TextView tv_name = dialogRead.findViewById(R.id.dtv_name);
+        final TextView tv_tag = dialogRead.findViewById(R.id.dtv_tag);
+        iv_photo = dialogRead.findViewById(R.id.div_photo);
+        Button btnClose = dialogRead.findViewById(R.id.btnClose);
+
+        Cursor cursor = sqLiteHelperTOPS.getData(
+                "SELECT * FROM TABLE_NAME WHERE id = " + position);
+        mList.clear();
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            tv_name.setText(name);
+            String tag = cursor.getString(2);
+            tv_tag.setText(tag);
+            byte[] image = cursor.getBlob(3);
+            iv_photo.setImageBitmap(BitmapFactory.decodeByteArray(image, 0, image.length));
+        }
+
+        int width = (int)(activity.getResources().getDisplayMetrics().widthPixels * 0.95);
+        int height = (int)(activity.getResources().getDisplayMetrics().heightPixels * 0.7);
+        dialogRead.getWindow().setLayout(width, height);
+        dialogRead.show();
+
+        updateListData();
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogRead.dismiss();
+            }
+        });
+       /* final Dialog dialogRead = new Dialog(activity);
+        dialogRead.setContentView(R.layout.dialog_viewtop_read);
+        dialogRead.setTitle("Read ...");
+
         final TextView tv_name = dialogRead.findViewById(R.id.tv_name);
         final TextView tv_tag =  dialogRead.findViewById(R.id.tv_tag);
         iv_photo = dialogRead.findViewById(R.id.iv_photo);
@@ -169,7 +212,7 @@ public class secondactivity_viewtop extends AppCompatActivity {
             public void onClick(View v) {
                 dialogRead.dismiss();
             }
-        });
+        });*/
     }
 
     private void showDialogUpdate(Activity activity, final int position) {

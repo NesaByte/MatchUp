@@ -28,6 +28,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn_viewInventory).setOnClickListener(this);
         findViewById(R.id.btn_addNewItem).setOnClickListener(this);
         findViewById(R.id.btn_removeItem).setOnClickListener(this);
+
+        sqLiteHelperTOPS = new SQLiteHelperTOPS(this, "DBTOPS.sqlite", null, 1);
+        sqLiteHelperTOPS.queryData("CREATE TABLE IF NOT EXISTS TABLE_NAME "
+                + "(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, tag VARCHAR, image BLOB)");
+
+
         //assigning the buttons with their id
         /*
         btn_matchUp       = findViewById(R.id.btn_matchUp);

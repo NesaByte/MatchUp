@@ -56,10 +56,10 @@ public class secondactivity_addtop extends AppCompatActivity {
             }
         });
 
-        sqLiteHelperTOPS = new SQLiteHelperTOPS(this, "DBTOPS.sqlite", null, 1);
+        /*sqLiteHelperTOPS = new SQLiteHelperTOPS(this, "DBTOPS.sqlite", null, 1);
         sqLiteHelperTOPS.queryData("CREATE TABLE IF NOT EXISTS TABLE_NAME "
                 + "(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, tag VARCHAR, image BLOB)");
-
+*/
         btn_addtops_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
