@@ -38,7 +38,12 @@ public class activity_viewinventory extends AppCompatActivity {
                 startActivity(new Intent(activity_viewinventory.this, secondactivity_viewtop.class));
             }
         });
-
+        ib_view_bottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(activity_viewinventory.this, secondactivity_viewbottom.class));
+            }
+        });
     }
 
 

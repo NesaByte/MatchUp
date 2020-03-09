@@ -5,7 +5,7 @@ public class Model {
     private String name, tags;
     private byte[] image;
 
-    public Model(int i, String n, String t, byte[] img){
+    public Model(int i, String n, String t, byte[] img){ //id, name, tag, image)
         this.id = i;
         this.name = n;
         this.tags = t;

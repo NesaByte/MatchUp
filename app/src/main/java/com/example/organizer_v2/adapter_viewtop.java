@@ -12,53 +12,62 @@ import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.FilterReader;
 import java.util.ArrayList;
 
 public class adapter_viewtop extends BaseAdapter implements Filterable {
+
+
     private Context context;
     private int layout;
-    private ArrayList<Model> modelArrayList;
+    private ArrayList<Model> list;
 
-    ArrayList<Model> modelArrayList_value;
+    ArrayList<Model> mValue;
     ValueFilter valueFilter;
 
-    public adapter_viewtop(Context context, int layout, ArrayList<Model> list){
+
+    public adapter_viewtop(Context context, int layout, ArrayList<Model> list) {
         this.context = context;
         this.layout = layout;
-        this.modelArrayList = list;
-        modelArrayList_value = list;
+        this.list = list;
+
+        mValue = list;
     }
 
     @Override
-    public int getCount(){return modelArrayList.size();}
+    public int getCount(){return list.size();}
 
     @Override
-    public Object getItem(int pos){return  modelArrayList.get(pos);}
+    public Object getItem(int position) {
+        return list.get(position);
+    }
 
     @Override
-    public long getItemId(int pos){return pos;}
+    public long getItemId(int position) {
+        return position;
+    }
 
     private class ViewHolder{
         TextView tv_name, tv_tag;
         ImageView iv_photo;
     }
-
     @Override
-    public View getView(int pos, View v, ViewGroup vg){
-        View row = v;
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        View row = convertView;
         ViewHolder holder = new ViewHolder();
 
-        if(row == null){
+        if (row == null) {
             LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(layout, null);
             holder.tv_name = row.findViewById(R.id.tv_name);
             holder.tv_tag = row.findViewById(R.id.tv_tag);
             holder.iv_photo = row.findViewById(R.id.iv_photo);
-        }else{
+            row.setTag(holder);
+        } else {
             holder = (ViewHolder)row.getTag();
         }
-        Model model = modelArrayList.get(pos);
+
+        Model model = list.get(position);
 
         holder.tv_name.setText(model.getName());
         holder.tv_tag.setText(model.getTags());
@@ -67,31 +76,30 @@ public class adapter_viewtop extends BaseAdapter implements Filterable {
         Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
         holder.iv_photo.setImageBitmap(bitmap);
 
-        return  row;
+        return row;
     }
 
     @Override
-    public  Filter getFilter(){
-        if(valueFilter == null){
+    public Filter getFilter() {
+        if (valueFilter == null) {
             valueFilter = new ValueFilter();
         }
         return valueFilter;
     }
 
-    private class ValueFilter extends Filter{
+    private class ValueFilter extends Filter {
         @Override
-        protected FilterResults performFiltering(CharSequence constraint){
+        protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
 
-            if(constraint != null || constraint.length() > 0){
+            if (constraint != null || constraint.length() > 0) {
                 ArrayList<Model> filterList = new ArrayList<>();
-                for(int i = 0; i < modelArrayList_value.size(); i++){
-                    if((modelArrayList_value.get(i).getName().toUpperCase())
-                        .contains(constraint.toString().toUpperCase())){
-                        Model model = new Model(modelArrayList_value.get(i).getId(),
-                                modelArrayList_value.get(i).getName(),
-                                modelArrayList_value.get(i).getTags(),
-                                modelArrayList_value.get(i).getImage());
+                for (int i = 0; i < mValue.size(); i++) {
+                    if ((mValue.get(i).getName().toUpperCase()).contains(constraint.toString().toUpperCase())) {
+                        Model model = new Model(mValue.get(i).getId(),
+                                mValue.get(i).getName(),
+                                mValue.get(i).getTags(),
+                                mValue.get(i).getImage());
                         filterList.add(model);
                     }
                 }
@@ -102,9 +110,10 @@ public class adapter_viewtop extends BaseAdapter implements Filterable {
         }
 
         @Override
-        protected void publishResults(CharSequence constraint, FilterResults results){
-            modelArrayList = (ArrayList<Model>) results.values;
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            list = (ArrayList<Model>) results.values;
             notifyDataSetChanged();
         }
     };
+
 }

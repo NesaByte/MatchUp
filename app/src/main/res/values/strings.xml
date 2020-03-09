@@ -33,20 +33,18 @@
     <string name="i_add_top">ib_add_top</string>
     <string name="i_add_bottom">ib_add_bottom</string>
 
-    <!-- dialog_addnewintem -->
+    <!-- activity_secondaddtop -->
     <string name="t_add_name">Name</string>
     <string name="t_add_tag">Tag</string>
     <string name="e_add_name">Name this top</string>
     <string name="e_add_tag">Give tags for this top</string>
 
-    <!-- dialog_addnewintemBOTTOM -->
+    <!-- activity_secondaddbottom -->
     <string name="t_add_nameB">Name</string>
     <string name="t_add_tagB">Tag</string>
-    <string name="e_add_Bname">Name this Bottom</string>
-    <string name="e_add_Btag">Give tags for this bottom</string>
+    <string name="e_add_nameB">Name this Bottom</string>
+    <string name="e_add_tagB">Give tags for this bottom</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- activity_viewinventory -->
     <string name="t_view_inventory">View Inventory</string>

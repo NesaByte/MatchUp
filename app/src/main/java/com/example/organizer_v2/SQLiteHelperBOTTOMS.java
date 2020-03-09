@@ -8,25 +8,23 @@ import android.database.sqlite.SQLiteStatement;
 
 import androidx.annotation.Nullable;
 
-public class SQLiteHelperTOPS extends SQLiteOpenHelper {
+public class SQLiteHelperBOTTOMS extends SQLiteOpenHelper {
 
+    private static final String TAG = "SQLiteHelperBOTTOMS";
 
-    private static final String TAG = "SQLiteHelperTOPS";
-    //public static final String DB_NAME = "TOPS.DB";
-
-    SQLiteHelperTOPS(@Nullable Context context,
+    SQLiteHelperBOTTOMS(@Nullable Context context,
                      String name,
                      SQLiteDatabase.CursorFactory cursorFactory,
                      int version){
         super(context, name, cursorFactory, version);
     }
 
-    public void queryData(String sql){
+    public void queryDataB(String sql){
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL(sql);
     }
 
-    public void insertData(String name, String tag, byte[] image){
+    public void insertDataB(String name, String tag, byte[] image){
         SQLiteDatabase db = getWritableDatabase();
         String sql = "INSERT INTO TABLE_NAME VALUES(NULL, ?, ?, ?)";
         SQLiteStatement sqLiteStatement = db.compileStatement(sql);
@@ -38,12 +36,12 @@ public class SQLiteHelperTOPS extends SQLiteOpenHelper {
         sqLiteStatement.executeInsert();
     }
 
-    public Cursor getData(String sql) {
+    public Cursor getDataB(String sql) {
         SQLiteDatabase db = getReadableDatabase();
         return db.rawQuery(sql, null);
     }
 
-    public void updateData(String name, String tag, byte[] image, int id){
+    public void updateDataB(String name, String tag, byte[] image, int id){
         SQLiteDatabase db = getWritableDatabase();
         String sql = "UPDATE TABLE_NAME SET name = ?, tag = ?, image = ? WHERE id = ?";
         SQLiteStatement sqLiteStatement = db.compileStatement(sql);
@@ -55,10 +53,9 @@ public class SQLiteHelperTOPS extends SQLiteOpenHelper {
         sqLiteStatement.bindDouble(4, (double)id);
         sqLiteStatement.execute();
         db.close();
-
     }
 
-    public void deleteData(int id){
+    public void deleteDataB(int id){
         SQLiteDatabase db = getWritableDatabase();
         String sql = "DELETE FROM TABLE_NAME WHERE id = ?";
         SQLiteStatement sqLiteStatement = db.compileStatement(sql);
@@ -68,6 +65,8 @@ public class SQLiteHelperTOPS extends SQLiteOpenHelper {
         sqLiteStatement.execute();
         db.close();
     }
+
+
     @Override
     public void onCreate(SQLiteDatabase db) {
     }

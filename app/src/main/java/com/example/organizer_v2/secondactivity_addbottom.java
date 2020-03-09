@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -23,62 +22,51 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
-import static com.example.organizer_v2.activity_addnewitem.sqLiteHelperTOPS;
 
+import static com.example.organizer_v2.MainActivity.sqLiteHelperBOTTOMS;
 
-public class secondactivity_addtop extends AppCompatActivity {
-    //ImageButton
-    ImageView iv_photo;
-    EditText et_name, et_tag;
-    Button btn_addtops_add;
-    //public static SQLiteHelperTOPS sqLiteHelperTOPS;
+public class secondactivity_addbottom extends AppCompatActivity {
+
+    ImageView iv_photoB;
+    EditText et_nameB, et_tagB;
+    Button btn_addbottoms_add;
 
     final int REQUEST_CODE_GALLERY = 999;
-    //public static SQLiteHelperTOPS sqLiteHelperTOPS;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_secondaddtop);
+        setContentView(R.layout.activity_secondaddbottom);
 
         getSupportActionBar().setTitle("Adding new top");
 
-        et_name =         findViewById(R.id.et_name);
-        et_tag  =         findViewById(R.id.et_tag);
-        iv_photo =  findViewById(R.id.iv_photo);
-        btn_addtops_add =     findViewById(R.id.btn_addtops_add);
+        et_nameB =         findViewById(R.id.et_nameB);
+        et_tagB  =         findViewById(R.id.et_tagB);
+        iv_photoB =  findViewById(R.id.iv_photoB);
+        btn_addbottoms_add =     findViewById(R.id.btn_addbottoms_add);
 
-        iv_photo.setOnClickListener(new View.OnClickListener() {
+        iv_photoB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                ActivityCompat.requestPermissions(secondactivity_addtop.this,
+                ActivityCompat.requestPermissions(secondactivity_addbottom.this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         REQUEST_CODE_GALLERY);
             }
         });
-  /*      sqLiteHelperTOPS = new SQLiteHelperTOPS(this, "DB_TOPS.sqlite", null, 1);
 
-        sqLiteHelperTOPS.queryData("CREATE TABLE IF NOT EXISTS TABLE_NAME " +
-                "(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, tag VARCHAR, image BLOB)");
-*/
-
-        /*sqLiteHelperTOPS = new SQLiteHelperTOPS(this, "DBTOPS.sqlite", null, 1);
-        sqLiteHelperTOPS.queryData("CREATE TABLE IF NOT EXISTS TABLE_NAME "
-                + "(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, tag VARCHAR, image BLOB)");
-*/
-        btn_addtops_add.setOnClickListener(new View.OnClickListener() {
+        btn_addbottoms_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    sqLiteHelperTOPS.insertData(
-                            et_name.getText().toString().trim(),
-                            et_tag.getText().toString().trim(),
-                            imageViewToByte(iv_photo)
+                    sqLiteHelperBOTTOMS.insertData(
+                            et_nameB.getText().toString().trim(),
+                            et_tagB.getText().toString().trim(),
+                            imageViewToByte(iv_photoB)
                     );
                     toastMsg("Added successfully.");
-                    et_name.setText("");
-                    et_tag.setText("");
-                    iv_photo.setImageResource(R.drawable.insert_photos);
+                    et_nameB.setText("");
+                    et_tagB.setText("");
+                    iv_photoB.setImageResource(R.drawable.insert_photos);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -93,7 +81,6 @@ public class secondactivity_addtop extends AppCompatActivity {
         byte[] byteArr = stream.toByteArray();
         return byteArr;
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_CODE_GALLERY) {
@@ -129,7 +116,7 @@ public class secondactivity_addtop extends AppCompatActivity {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
-                iv_photo.setImageURI(resultUri);
+                iv_photoB.setImageURI(resultUri);
             } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
                 toastMsg("Error: " + error);
@@ -141,5 +128,7 @@ public class secondactivity_addtop extends AppCompatActivity {
     private void toastMsg(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
+
+
 
 }

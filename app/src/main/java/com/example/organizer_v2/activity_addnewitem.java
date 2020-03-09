@@ -15,7 +15,9 @@ import android.widget.ImageButton;
 public class activity_addnewitem extends AppCompatActivity {
 
     ImageButton ib_add_top, ib_add_bottom;
-    EditText  et_add_name, et_add_tag;
+    EditText  et_name, et_tag;
+    public static SQLiteHelperTOPS sqLiteHelperTOPS;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,11 +26,16 @@ public class activity_addnewitem extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Add New Item");
 
-        et_add_name =    findViewById(R.id.et_add_name);
-        et_add_tag  =    findViewById(R.id.et_add_tag);
+        et_name =    findViewById(R.id.et_name);
+        et_tag  =    findViewById(R.id.et_tag);
 
         ib_add_top =     findViewById(R.id.ib_add_top);
         ib_add_bottom =  findViewById(R.id.ib_add_bottom);
+
+        sqLiteHelperTOPS = new SQLiteHelperTOPS(this, "DB_TOPS.sqlite", null, 1);
+
+        sqLiteHelperTOPS.queryData("CREATE TABLE IF NOT EXISTS TABLE_NAME " +
+                "(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, tag VARCHAR, image BLOB)");
 
 
         ib_add_top.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +44,14 @@ public class activity_addnewitem extends AppCompatActivity {
                 startActivity(new Intent(activity_addnewitem.this, secondactivity_addtop.class));
             }
         });
+
+        ib_add_bottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(activity_addnewitem.this, secondactivity_addbottom.class));
+            }
+        });
+
 
     }
 

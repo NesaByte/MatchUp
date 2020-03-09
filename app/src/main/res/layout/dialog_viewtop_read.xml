@@ -8,7 +8,7 @@
     android:gravity="center">
 
     <TextView
-        android:id="@+id/dtv_name"
+        android:id="@+id/tv_name"
         android:text="@string/t_add_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         android:ems="10"/>
 
     <TextView
-        android:id="@+id/dtv_tag"
+        android:id="@+id/tv_tag"
         android:text="@string/t_add_tag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
         android:ems="20"/>
 
     <ImageView
-        android:id="@+id/div_photo"
+        android:id="@+id/iv_photo"
         android:contentDescription="@string/iv_photo"
         android:layout_width="200dp"
         android:layout_height="200dp"

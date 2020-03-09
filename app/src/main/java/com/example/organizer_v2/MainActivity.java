@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity{
 
     //main menu = MATCH UP
     /*private ImageView img;
@@ -17,22 +17,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btn_viewInventory;
     private Button btn_addNewItem;
     private Button btn_removeItem;*/
-    public static SQLiteHelperTOPS sqLiteHelperTOPS;
+    Button btn_viewInventory, btn_addNewItem;
+    ImageView img;
+
+    //public static SQLiteHelperTOPS sqLiteHelperTOPS;
+    public static SQLiteHelperTOPS sqLiteHelperBOTTOMS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        btn_viewInventory = findViewById(R.id.btn_viewInventory);
+        btn_addNewItem    = findViewById(R.id.btn_addNewItem);
+        img               = findViewById(R.id.imageView);
+
+/*
         findViewById(R.id.btn_matchUp).setOnClickListener(this);
         findViewById(R.id.btn_viewInventory).setOnClickListener(this);
         findViewById(R.id.btn_addNewItem).setOnClickListener(this);
         findViewById(R.id.btn_removeItem).setOnClickListener(this);
+*/
+        /*
+        sqLiteHelperTOPS = new SQLiteHelperTOPS(this, "DB_TOPS.sqlite", null, 1);
 
-        sqLiteHelperTOPS = new SQLiteHelperTOPS(this, "DBTOPS.sqlite", null, 1);
-        sqLiteHelperTOPS.queryData("CREATE TABLE IF NOT EXISTS TABLE_NAME "
-                + "(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, tag VARCHAR, image BLOB)");
+        sqLiteHelperTOPS.queryData("CREATE TABLE IF NOT EXISTS TABLE_NAME " +
+                "(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, tag VARCHAR, image BLOB)");
+*/
+        sqLiteHelperBOTTOMS = new SQLiteHelperTOPS(this, "DB_BOTTOMS.sqlite", null, 1);
+        sqLiteHelperBOTTOMS.queryData("CREATE TABLE IF NOT EXISTS TABLE_NAME " +
+                "(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, tag VARCHAR, image BLOB)");
 
+        btn_viewInventory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, activity_viewinventory.class));
+            }
+        });
+
+        btn_addNewItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, activity_addnewitem.class));
+            }
+        });
 
         //assigning the buttons with their id
         /*
@@ -75,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 */
     }
-
+/*
     @Override
     public void onClick(View v){
         switch (v.getId()){
@@ -96,5 +124,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-
+*/
 }
