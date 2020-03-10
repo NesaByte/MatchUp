@@ -23,15 +23,15 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
-import static com.example.organizer_v2.activity_addnewitem.sqLiteHelperTOPS;
 
+//import static com.example.organizer_v2.MainActivity.imageViewToByte;
+import static com.example.organizer_v2.MainActivity.sqLiteHelperTOPS;
 
 public class secondactivity_addtop extends AppCompatActivity {
     //ImageButton
     ImageView iv_photo;
     EditText et_name, et_tag;
     Button btn_addtops_add;
-    //public static SQLiteHelperTOPS sqLiteHelperTOPS;
 
     final int REQUEST_CODE_GALLERY = 999;
     //public static SQLiteHelperTOPS sqLiteHelperTOPS;
@@ -56,7 +56,7 @@ public class secondactivity_addtop extends AppCompatActivity {
                         REQUEST_CODE_GALLERY);
             }
         });
-  /*      sqLiteHelperTOPS = new SQLiteHelperTOPS(this, "DB_TOPS.sqlite", null, 1);
+ /*       sqLiteHelperTOPS = new SQLiteHelperTOPS(this, "DB_TOPS.sqlite", null, 1);
 
         sqLiteHelperTOPS.queryData("CREATE TABLE IF NOT EXISTS TABLE_NAME " +
                 "(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, tag VARCHAR, image BLOB)");
@@ -73,7 +73,7 @@ public class secondactivity_addtop extends AppCompatActivity {
                     sqLiteHelperTOPS.insertData(
                             et_name.getText().toString().trim(),
                             et_tag.getText().toString().trim(),
-                            imageViewToByte(iv_photo)
+                            MainActivity.imageViewToByte(iv_photo)
                     );
                     toastMsg("Added successfully.");
                     et_name.setText("");
@@ -85,7 +85,7 @@ public class secondactivity_addtop extends AppCompatActivity {
             }
         });
     }
-
+/*
     public static byte[] imageViewToByte(ImageView image){
         Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -93,7 +93,7 @@ public class secondactivity_addtop extends AppCompatActivity {
         byte[] byteArr = stream.toByteArray();
         return byteArr;
     }
-
+*/
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_CODE_GALLERY) {

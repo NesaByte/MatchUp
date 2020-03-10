@@ -18,7 +18,6 @@
         <activity android:name=".secondactivity_addtop" />
         <activity android:name=".activity_addnewitem" />
         <activity android:name=".activity_viewinventory" />
-        <activity android:name=".activity_removeitem" />
         <activity android:name=".activity_matchup" />
         <activity android:name=".MainActivity">
             <intent-filter>

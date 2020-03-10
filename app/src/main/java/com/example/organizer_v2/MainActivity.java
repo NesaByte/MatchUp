@@ -4,10 +4,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import java.io.ByteArrayOutputStream;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -20,7 +24,7 @@ public class MainActivity extends AppCompatActivity{
     Button btn_viewInventory, btn_addNewItem;
     ImageView img;
 
-    //public static SQLiteHelperTOPS sqLiteHelperTOPS;
+    public static SQLiteHelperTOPS sqLiteHelperTOPS;
     public static SQLiteHelperTOPS sqLiteHelperBOTTOMS;
 
     @Override
@@ -38,15 +42,18 @@ public class MainActivity extends AppCompatActivity{
         findViewById(R.id.btn_addNewItem).setOnClickListener(this);
         findViewById(R.id.btn_removeItem).setOnClickListener(this);
 */
-        /*
+
         sqLiteHelperTOPS = new SQLiteHelperTOPS(this, "DB_TOPS.sqlite", null, 1);
 
         sqLiteHelperTOPS.queryData("CREATE TABLE IF NOT EXISTS TABLE_NAME " +
                 "(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, tag VARCHAR, image BLOB)");
-*/
+
+
         sqLiteHelperBOTTOMS = new SQLiteHelperTOPS(this, "DB_BOTTOMS.sqlite", null, 1);
         sqLiteHelperBOTTOMS.queryData("CREATE TABLE IF NOT EXISTS TABLE_NAME " +
                 "(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, tag VARCHAR, image BLOB)");
+
+
 
         btn_viewInventory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +109,14 @@ public class MainActivity extends AppCompatActivity{
         });
 
 */
+    }
+
+    public static byte[] imageViewToByte(ImageView image){
+        Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArr = stream.toByteArray();
+        return byteArr;
     }
 /*
     @Override

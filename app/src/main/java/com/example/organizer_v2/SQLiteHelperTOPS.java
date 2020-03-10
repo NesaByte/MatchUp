@@ -13,14 +13,14 @@ public class SQLiteHelperTOPS extends SQLiteOpenHelper {
 
     private static final String TAG = "SQLiteHelperTOPS";
     //public static final String DB_NAME = "TOPS.DB";
-
+//sqLiteHelperTOPS = new SQLiteHelperTOPS(this, "DB_TOPS.sqlite", null, 1);
     SQLiteHelperTOPS(@Nullable Context context,
                      String name,
                      SQLiteDatabase.CursorFactory cursorFactory,
                      int version){
         super(context, name, cursorFactory, version);
     }
-
+//  "(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, tag VARCHAR, image BLOB)");
     public void queryData(String sql){
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL(sql);

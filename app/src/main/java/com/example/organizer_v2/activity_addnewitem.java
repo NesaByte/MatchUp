@@ -16,7 +16,7 @@ public class activity_addnewitem extends AppCompatActivity {
 
     ImageButton ib_add_top, ib_add_bottom;
     EditText  et_name, et_tag;
-    public static SQLiteHelperTOPS sqLiteHelperTOPS;
+    //public static SQLiteHelperTOPS sqLiteHelperTOPS;
 
 
     @Override
@@ -32,11 +32,11 @@ public class activity_addnewitem extends AppCompatActivity {
         ib_add_top =     findViewById(R.id.ib_add_top);
         ib_add_bottom =  findViewById(R.id.ib_add_bottom);
 
-        sqLiteHelperTOPS = new SQLiteHelperTOPS(this, "DB_TOPS.sqlite", null, 1);
+  /*      sqLiteHelperTOPS = new SQLiteHelperTOPS(this, "DB_TOPS.sqlite", null, 1);
 
         sqLiteHelperTOPS.queryData("CREATE TABLE IF NOT EXISTS TABLE_NAME " +
                 "(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, tag VARCHAR, image BLOB)");
-
+*/
 
         ib_add_top.setOnClickListener(new View.OnClickListener() {
             @Override

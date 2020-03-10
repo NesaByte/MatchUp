@@ -33,7 +33,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.ArrayList;
 
-import static com.example.organizer_v2.activity_addnewitem.sqLiteHelperTOPS;
+import static com.example.organizer_v2.MainActivity.sqLiteHelperTOPS;
 
 public class secondactivity_viewtop extends AppCompatActivity {
 
@@ -52,6 +52,8 @@ public class secondactivity_viewtop extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secondviewtop);
+
+        getSupportActionBar().setTitle("Viewing tops");
 
         sv_searchView = findViewById(R.id.sv_searchView);
         lv_listView = findViewById(R.id.lv_listView);
@@ -86,11 +88,12 @@ public class secondactivity_viewtop extends AppCompatActivity {
             mList.add(new Model(id, name, tag, image));
         }
         mAdapter.notifyDataSetChanged();
+
         if (mList.size() == 0) {
             toastMsg("No data found.");
         }
 
-/*
+
         lv_listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -136,7 +139,7 @@ public class secondactivity_viewtop extends AppCompatActivity {
                 return true;
             }
         });
-*/
+
     }
 
     private void showDialogRead(Activity activity, final int position) {
@@ -224,7 +227,7 @@ public class secondactivity_viewtop extends AppCompatActivity {
                     sqLiteHelperTOPS.updateData(
                             et_name.getText().toString().trim(),
                             et_tag.getText().toString().trim(),
-                            secondactivity_addtop.imageViewToByte(iv_photo),
+                            MainActivity.imageViewToByte(iv_photo),
                             position
                     );
                     toastMsg("Updated successfully.");

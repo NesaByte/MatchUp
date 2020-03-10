@@ -61,7 +61,7 @@ public class secondactivity_addbottom extends AppCompatActivity {
                     sqLiteHelperBOTTOMS.insertData(
                             et_nameB.getText().toString().trim(),
                             et_tagB.getText().toString().trim(),
-                            imageViewToByte(iv_photoB)
+                            MainActivity.imageViewToByte(iv_photoB)
                     );
                     toastMsg("Added successfully.");
                     et_nameB.setText("");
@@ -74,13 +74,14 @@ public class secondactivity_addbottom extends AppCompatActivity {
         });
     }
 
-    public static byte[] imageViewToByte(ImageView image){
+    /*public static byte[] imageViewToByte(ImageView image){
         Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byteArr = stream.toByteArray();
         return byteArr;
-    }
+    }*/
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_CODE_GALLERY) {

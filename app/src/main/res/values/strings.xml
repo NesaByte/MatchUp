@@ -2,7 +2,7 @@
     <!-- activity_main -->
     <string name="app_name">MATCH IT UP</string>
     <string name="match_up">Match Up</string>
-    <string name="view_inventory">View Inventory</string>
+    <string name="view_inventory">Manipulate Inventory</string>
     <string name="add_new_item">Add New Item</string>
     <string name="remove_item">Remove Item</string>
     <string name="icon">icon</string>
@@ -47,8 +47,8 @@
 
 
     <!-- activity_viewinventory -->
-    <string name="t_view_inventory">View Inventory</string>
-    <string name="t_view_top_or_bottom">Do you want to view top or bottom?</string>
+    <string name="t_view_inventory">You can (1)view details, (2)update items, (3)delete items.</string>
+    <string name="t_view_top_or_bottom">Do you want to manipulate top or bottom?</string>
     <string name="i_view_top">ib_view_top</string>
     <string name="i_view_bottom">ib_view_bottom</string>
 
