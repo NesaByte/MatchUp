@@ -58,7 +58,7 @@ public class secondactivity_addbottom extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    sqLiteHelperBOTTOMS.insertData(
+                    sqLiteHelperBOTTOMS.insertDataB(
                             et_nameB.getText().toString().trim(),
                             et_tagB.getText().toString().trim(),
                             MainActivity.imageViewToByte(iv_photoB)

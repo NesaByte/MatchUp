@@ -47,7 +47,7 @@
 
 
     <!-- activity_viewinventory -->
-    <string name="t_view_inventory">You can (1)view details, (2)update items, (3)delete items.</string>
+    <string name="t_view_inventory">You can View, Update, or Delete items.</string>
     <string name="t_view_top_or_bottom">Do you want to manipulate top or bottom?</string>
     <string name="i_view_top">ib_view_top</string>
     <string name="i_view_bottom">ib_view_bottom</string>

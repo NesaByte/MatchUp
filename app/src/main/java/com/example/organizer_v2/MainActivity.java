@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity{
     ImageView img;
 
     public static SQLiteHelperTOPS sqLiteHelperTOPS;
-    public static SQLiteHelperTOPS sqLiteHelperBOTTOMS;
+    public static SQLiteHelperBOTTOMS sqLiteHelperBOTTOMS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,25 +36,24 @@ public class MainActivity extends AppCompatActivity{
         btn_addNewItem    = findViewById(R.id.btn_addNewItem);
         img               = findViewById(R.id.imageView);
 
-/*
-        findViewById(R.id.btn_matchUp).setOnClickListener(this);
-        findViewById(R.id.btn_viewInventory).setOnClickListener(this);
-        findViewById(R.id.btn_addNewItem).setOnClickListener(this);
-        findViewById(R.id.btn_removeItem).setOnClickListener(this);
-*/
-
+        /**
+         * CREATION OF DATABASE FOR TOPS
+         */
         sqLiteHelperTOPS = new SQLiteHelperTOPS(this, "DB_TOPS.sqlite", null, 1);
-
         sqLiteHelperTOPS.queryData("CREATE TABLE IF NOT EXISTS TABLE_NAME " +
                 "(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, tag VARCHAR, image BLOB)");
 
-
-        sqLiteHelperBOTTOMS = new SQLiteHelperTOPS(this, "DB_BOTTOMS.sqlite", null, 1);
-        sqLiteHelperBOTTOMS.queryData("CREATE TABLE IF NOT EXISTS TABLE_NAME " +
+        /**
+         * CREATION OF DATABASE FOR BOTTOMS
+         */
+        sqLiteHelperBOTTOMS = new SQLiteHelperBOTTOMS(this, "DB_BOTTOMS.sqlite", null, 1);
+        sqLiteHelperBOTTOMS.queryDataB("CREATE TABLE IF NOT EXISTS TABLE_NAME " +
                 "(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, tag VARCHAR, image BLOB)");
 
 
-
+        /**
+         * CREATION OF DATABASE FOR TOPS
+         */
         btn_viewInventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,47 +67,6 @@ public class MainActivity extends AppCompatActivity{
                 startActivity(new Intent(MainActivity.this, activity_addnewitem.class));
             }
         });
-
-        //assigning the buttons with their id
-        /*
-        btn_matchUp       = findViewById(R.id.btn_matchUp);
-        btn_viewInventory = findViewById(R.id.btn_viewInventory);
-        btn_addNewItem    = findViewById(R.id.btn_addNewItem);
-        btn_removeItem    = findViewById(R.id.btn_removeItem);
-        img               = findViewById(R.id.imageView);*/
-
-        /*//listeners
-        btn_matchUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent( MainActivity.this, activity_matchup.class);
-                startActivity(intent);
-                //startActivity(new Intent(MainActivity.this, activity_matchup.class));
-            }
-        });
-
-        btn_viewInventory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, activity_viewinventory.class));
-            }
-        });
-
-        btn_addNewItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, activity_addnewitem.class));
-            }
-        });
-
-        btn_removeItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, activity_removeitem.class));
-            }
-        });
-
-*/
     }
 
     public static byte[] imageViewToByte(ImageView image){

@@ -90,17 +90,17 @@ public class secondactivity_viewtop extends AppCompatActivity {
         mAdapter.notifyDataSetChanged();
 
         if (mList.size() == 0) {
-            toastMsg("No data found.");
+            toastMsg("Empty tops");
         }
 
 
         lv_listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                final CharSequence[] items = {"Read", "Update", "Delete"};
+                final CharSequence[] items = {"View details", "Update top", "Delete top"};
 
                 AlertDialog.Builder dialog = new AlertDialog.Builder(secondactivity_viewtop.this);
-                dialog.setTitle("Choose an action.");
+                dialog.setTitle("What do you want to do?");
                 dialog.setItems(items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -145,7 +145,7 @@ public class secondactivity_viewtop extends AppCompatActivity {
     private void showDialogRead(Activity activity, final int position) {
         final Dialog dialogRead = new Dialog(activity);
         dialogRead.setContentView(R.layout.dialog_viewtop_read);
-        dialogRead.setTitle("Read ...");
+        dialogRead.setTitle("Details of this top:");
 
         final TextView tv_name = dialogRead.findViewById(R.id.tv_name);
         final TextView tv_tag = dialogRead.findViewById(R.id.tv_tag);
@@ -184,7 +184,7 @@ public class secondactivity_viewtop extends AppCompatActivity {
     private void showDialogUpdate(Activity activity, final int position) {
         final Dialog dialogUpdate = new Dialog(activity);
         dialogUpdate.setContentView(R.layout.dialog_viewtop_update);
-        dialogUpdate.setTitle("Update ...");
+        dialogUpdate.setTitle("Let's update this top's information");
 
         final EditText et_name = dialogUpdate.findViewById(R.id.et_name);
         final EditText et_tag = dialogUpdate.findViewById(R.id.et_tag);
@@ -244,8 +244,8 @@ public class secondactivity_viewtop extends AppCompatActivity {
 
     private void showDialogDelete(final int position) {
         AlertDialog.Builder dialogDelete = new AlertDialog.Builder(secondactivity_viewtop.this);
-        dialogDelete.setTitle("Delete ...");
-        dialogDelete.setMessage("Are you sure to delete it?");
+        dialogDelete.setTitle("Deleting this top");
+        dialogDelete.setMessage("Are you sure you want to delete this top?");
         dialogDelete.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -254,7 +254,7 @@ public class secondactivity_viewtop extends AppCompatActivity {
                     toastMsg("Deleted Successfully.");
                 }
                 catch (Exception e) {
-                    Log.e("error: ", e.getMessage());
+                    Log.e("Deletion error: ", e.getMessage());
                 }
                 updateListData();
             }
@@ -288,7 +288,7 @@ public class secondactivity_viewtop extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 pickImageFromGallery();
             } else {
-                toastMsg("You don't have permission to access file location");
+                toastMsg("No permission to access file location");
             }
             return;
         }
@@ -299,7 +299,7 @@ public class secondactivity_viewtop extends AppCompatActivity {
         Intent gallery = new Intent();
         gallery.setType("image/*");
         gallery.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(gallery, "Select Picture"), REQUEST_CODE_GALLERY);
+        startActivityForResult(Intent.createChooser(gallery, "Select Top Picture"), REQUEST_CODE_GALLERY);
     }
 
     @Override

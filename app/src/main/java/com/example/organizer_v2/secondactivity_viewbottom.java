@@ -33,7 +33,6 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import java.util.ArrayList;
 
 import static com.example.organizer_v2.MainActivity.sqLiteHelperBOTTOMS;
-import static com.example.organizer_v2.MainActivity.sqLiteHelperTOPS;
 
 public class secondactivity_viewbottom extends AppCompatActivity {
 
@@ -76,7 +75,7 @@ public class secondactivity_viewbottom extends AppCompatActivity {
             }
         });
 
-        Cursor cursor = sqLiteHelperBOTTOMS.getData("SELECT * FROM TABLE_NAME");
+        Cursor cursor = sqLiteHelperBOTTOMS.getDataB("SELECT * FROM TABLE_NAME");
         mList.clear();
         while (cursor.moveToNext()) {
             int id = cursor.getInt(0);
@@ -94,15 +93,15 @@ public class secondactivity_viewbottom extends AppCompatActivity {
         lv_listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                final CharSequence[] items = {"Read", "Update", "Delete"};
+                final CharSequence[] items = {"View details", "Update bottom", "Delete bottom"};
 
                 AlertDialog.Builder dialog = new AlertDialog.Builder(secondactivity_viewbottom.this);
-                dialog.setTitle("Choose an action.");
+                dialog.setTitle("What do you want to do?");
                 dialog.setItems(items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if(which == 0){
-                            Cursor c = sqLiteHelperBOTTOMS.getData("SELECT id FROM TABLE_NAME");
+                            Cursor c = sqLiteHelperBOTTOMS.getDataB("SELECT id FROM TABLE_NAME");
                             ArrayList<Integer> arrID = new ArrayList<>();
                             while (c.moveToNext()) {
                                 arrID.add(c.getInt(0));
@@ -112,7 +111,7 @@ public class secondactivity_viewbottom extends AppCompatActivity {
                         }
 
                         if(which == 1){
-                            Cursor c = sqLiteHelperBOTTOMS.getData("SELECT id FROM TABLE_NAME");
+                            Cursor c = sqLiteHelperBOTTOMS.getDataB("SELECT id FROM TABLE_NAME");
                             ArrayList<Integer> arrayList_id = new ArrayList<>();
                             while(c.moveToNext()){
                                 arrayList_id.add(c.getInt(0));
@@ -122,7 +121,7 @@ public class secondactivity_viewbottom extends AppCompatActivity {
                         }
 
                         if(which == 2){
-                            Cursor c = sqLiteHelperBOTTOMS.getData("SELECT id FROM TABLE_NAME");
+                            Cursor c = sqLiteHelperBOTTOMS.getDataB("SELECT id FROM TABLE_NAME");
                             ArrayList<Integer> arrayList_id = new ArrayList<>();
                             while(c.moveToNext()){
                                 arrayList_id.add(c.getInt(0));
@@ -142,14 +141,14 @@ public class secondactivity_viewbottom extends AppCompatActivity {
     private void showDialogRead(Activity activity, final int position) {
         final Dialog dialogRead = new Dialog(activity);
         dialogRead.setContentView(R.layout.dialog_viewtop_read);
-        dialogRead.setTitle("Read ...");
+        dialogRead.setTitle("Details of this bottom");
 
         final TextView tv_name = dialogRead.findViewById(R.id.tv_name);
         final TextView tv_tag = dialogRead.findViewById(R.id.tv_tag);
         iv_photo = dialogRead.findViewById(R.id.iv_photo);
         Button btnClose = dialogRead.findViewById(R.id.btnClose);
 
-        Cursor cursor = sqLiteHelperBOTTOMS.getData(
+        Cursor cursor = sqLiteHelperBOTTOMS.getDataB(
                 "SELECT * FROM TABLE_NAME WHERE id = " + position);
         mList.clear();
         while (cursor.moveToNext()) {
@@ -180,14 +179,14 @@ public class secondactivity_viewbottom extends AppCompatActivity {
     private void showDialogUpdate(Activity activity, final int position) {
         final Dialog dialogUpdate = new Dialog(activity);
         dialogUpdate.setContentView(R.layout.dialog_viewtop_update);
-        dialogUpdate.setTitle("Update ...");
+        dialogUpdate.setTitle("Let's update this bottom's information");
 
         final EditText et_name = dialogUpdate.findViewById(R.id.et_name);
         final EditText et_tag = dialogUpdate.findViewById(R.id.et_tag);
         iv_photo = dialogUpdate.findViewById(R.id.iv_photo);
         Button btnUpdate = dialogUpdate.findViewById(R.id.btnUpdate);
 
-        Cursor cursor = sqLiteHelperBOTTOMS.getData(
+        Cursor cursor = sqLiteHelperBOTTOMS.getDataB(
                 "SELECT * FROM TABLE_NAME WHERE id = " + position);
         mList.clear();
         while (cursor.moveToNext()) {
@@ -220,7 +219,7 @@ public class secondactivity_viewbottom extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    sqLiteHelperBOTTOMS.updateData(
+                    sqLiteHelperBOTTOMS.updateDataB(
                             et_name.getText().toString().trim(),
                             et_tag.getText().toString().trim(),
                             MainActivity.imageViewToByte(iv_photo),
@@ -239,17 +238,17 @@ public class secondactivity_viewbottom extends AppCompatActivity {
 
     private void showDialogDelete(final int position) {
         AlertDialog.Builder dialogDelete = new AlertDialog.Builder(secondactivity_viewbottom.this);
-        dialogDelete.setTitle("Delete ...");
-        dialogDelete.setMessage("Are you sure to delete it?");
+        dialogDelete.setTitle("Deleting this bottom");
+        dialogDelete.setMessage("Are you sure you want to delete this bottom?");
         dialogDelete.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 try {
-                    sqLiteHelperTOPS.deleteData(position);
+                    sqLiteHelperBOTTOMS.deleteDataB(position);
                     toastMsg("Deleted Successfully.");
                 }
                 catch (Exception e) {
-                    Log.e("error: ", e.getMessage());
+                    Log.e("Deletion error: ", e.getMessage());
                 }
                 updateListData();
             }
@@ -264,7 +263,7 @@ public class secondactivity_viewbottom extends AppCompatActivity {
     }
 
     private void updateListData() {
-        Cursor cursor = sqLiteHelperBOTTOMS.getData("SELECT * FROM TABLE_NAME");
+        Cursor cursor = sqLiteHelperBOTTOMS.getDataB("SELECT * FROM TABLE_NAME");
         mList.clear();
         while (cursor.moveToNext()) {
             int id = cursor.getInt(0);
@@ -283,7 +282,7 @@ public class secondactivity_viewbottom extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 pickImageFromGallery();
             } else {
-                toastMsg("You don't have permission to access file location");
+                toastMsg("No permission to access file location");
             }
             return;
         }
@@ -294,7 +293,7 @@ public class secondactivity_viewbottom extends AppCompatActivity {
         Intent gallery = new Intent();
         gallery.setType("image/*");
         gallery.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(gallery, "Select Picture"), REQUEST_CODE_GALLERY);
+        startActivityForResult(Intent.createChooser(gallery, "Select Bottom Picture"), REQUEST_CODE_GALLERY);
     }
 
     @Override
