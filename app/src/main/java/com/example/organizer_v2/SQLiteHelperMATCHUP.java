@@ -24,15 +24,35 @@ public class SQLiteHelperMATCHUP extends SQLiteOpenHelper {
         db.execSQL(sql);
     }
 
-    public void insertDataM(String name, String tag, byte[] image){
+    /**
+     * INSERTION OF MATCHED TOPS AND BOTTOMS
+     *                          0 - int id_m, 1 - String name_m,
+     *                          2 - String name_t, 3 - String tags_t, 4 - byte[] img_t,
+     *                          5 - String name_b, 6 - String tags_b, 7 - byte[] img_b)
+     */
+    public void insertDataM(String name_m,
+                            //String name_t, String tags_t,
+                            byte[] img_t,
+                            //String name_b, String tags_b,
+                            byte[] img_b){
         SQLiteDatabase db = getWritableDatabase();
-        String sql = "INSERT INTO TABLE_NAME VALUES(NULL, ?, ?, ?)";
+        String sql = "INSERT INTO TABLE_NAME VALUES(NULL, ?, ?, ?)";//", ?, ?, ? ,?)";
         SQLiteStatement sqLiteStatement = db.compileStatement(sql);
 
+        sqLiteStatement.bindString(1, name_m);
+        sqLiteStatement.bindBlob(2, img_t);
+        sqLiteStatement.bindBlob(3, img_b);
+
+        /*
         sqLiteStatement.clearBindings();
-        sqLiteStatement.bindString(1, name);
-        sqLiteStatement.bindString(2, tag);
-        sqLiteStatement.bindBlob(3, image);
+        sqLiteStatement.bindString(1, name_m);
+        sqLiteStatement.bindString(2, name_t);
+        sqLiteStatement.bindString(3, tags_t);
+        sqLiteStatement.bindBlob(4, img_t);
+        sqLiteStatement.bindString(5, name_b);
+        sqLiteStatement.bindString(6, tags_b);
+        sqLiteStatement.bindBlob(7, img_b);
+        */
         sqLiteStatement.executeInsert();
     }
 
@@ -40,17 +60,42 @@ public class SQLiteHelperMATCHUP extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         return db.rawQuery(sql, null);
     }
-
-    public void updateDataM(String name, String tag, byte[] image, int id){
+/**
+ * "CREATE TABLE IF NOT EXISTS TABLE_NAME " +
+ *                 "(id INTEGER PRIMARY KEY AUTOINCREMENT, name_m VARCHAR " +
+ *                 "name_t VARCHAR,  tag_t VARCHAR, image_b BLOB, " +
+ *                 "name_b VARCHAR, tag_b VARCHAR, image_b BLOB)"*/
+    public void updateDataM(String name_m,
+                            //String name_t, String tags_t,
+                            byte[] img_t,
+                            //String name_b, String tags_b,
+                            byte[] img_b,
+                            int id){
         SQLiteDatabase db = getWritableDatabase();
-        String sql = "UPDATE TABLE_NAME SET name = ?, tag = ?, image = ? WHERE id = ?";
+        String sql = "UPDATE TABLE_NAME SET name_m = ?, " +
+                //"name_t = ?, tag_t = ?,
+                "img_t = ?, " +
+                //"name_b = ?, tag_b = ?,
+                "img_b = ? " +
+                "WHERE id = ?";
         SQLiteStatement sqLiteStatement = db.compileStatement(sql);
 
         //sqLiteStatement.clearBindings();
-        sqLiteStatement.bindString(1, name);
-        sqLiteStatement.bindString(2, tag);
-        sqLiteStatement.bindBlob(3, image);
+        sqLiteStatement.bindString(1, name_m);
+        sqLiteStatement.bindBlob(2, img_t);
+        sqLiteStatement.bindBlob(3, img_b);
         sqLiteStatement.bindDouble(4, (double)id);
+
+        /*
+        sqLiteStatement.bindString(1, name_m);
+        sqLiteStatement.bindString(2, name_t);
+        sqLiteStatement.bindString(3, tags_t);
+        sqLiteStatement.bindBlob(4, img_t);
+        sqLiteStatement.bindString(5, name_b);
+        sqLiteStatement.bindString(6, tags_b);
+        sqLiteStatement.bindBlob(7, img_b);
+        sqLiteStatement.bindDouble(8, (double)id);
+        */
         sqLiteStatement.execute();
         db.close();
     }

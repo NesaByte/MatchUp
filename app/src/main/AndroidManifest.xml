@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".secondactivity_viewbottom"></activity>
+        <activity android:name=".secondactivity_matchbottom"></activity>
+        <activity android:name=".secondactivity_matchtop" />
+        <activity android:name=".secondactivity_viewbottom" />
         <activity android:name=".secondactivity_addbottom" />
         <activity android:name=".secondactivity_viewtop" />
         <activity android:name=".secondactivity_addtop" />

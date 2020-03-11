@@ -38,12 +38,12 @@ public class secondactivity_addbottom extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secondaddbottom);
 
-        getSupportActionBar().setTitle("Adding new top");
+        getSupportActionBar().setTitle("Adding new bottom");
 
-        et_nameB =         findViewById(R.id.et_nameB);
-        et_tagB  =         findViewById(R.id.et_tagB);
-        iv_photoB =  findViewById(R.id.iv_photoB);
-        btn_addbottoms_add =     findViewById(R.id.btn_addbottoms_add);
+        et_nameB =            findViewById(R.id.et_nameB);
+        et_tagB  =            findViewById(R.id.et_tagB);
+        iv_photoB =           findViewById(R.id.iv_photoB);
+        btn_addbottoms_add =  findViewById(R.id.btn_addbottoms_add);
 
         iv_photoB.setOnClickListener(new View.OnClickListener() {
             @Override

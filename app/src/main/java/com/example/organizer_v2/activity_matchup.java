@@ -1,7 +1,9 @@
 package com.example.organizer_v2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,14 +12,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import static com.example.organizer_v2.MainActivity.sqLiteHelperMATCHUP;
 
 public class activity_matchup extends AppCompatActivity {
 
-/*
+    ImageView iv_phototop, iv_photobottom;
+    EditText et_matchname;
+    Button btn_amu_submit_mu;
 
-    //ImageButton ib_view_top, ib_view_bottom;
-    //EditText et_view_name, et_view_tag;
-    Button btn_amu_addtops, btn_amu_addbottoms, btn_amu_submit_mu;
+    final int REQUEST_CODE_GALLERY = 999;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,15 +32,59 @@ public class activity_matchup extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Match Up");
 
-        //et_view_name =    (EditText) findViewById(R.id.et_view_name);
-        //et_view_tag  =    (EditText) findViewById(R.id.et_view_tag);
+        et_matchname      = findViewById(R.id.et_matchname);
+        iv_phototop       = findViewById(R.id.iv_phototop);
+        iv_photobottom    = findViewById(R.id.iv_photobottom);
+        btn_amu_submit_mu = findViewById(R.id.btn_amu_submit_mu);
 
-        btn_amu_addtops =    (Button) findViewById(R.id.btn_amu_addtops);
-        btn_amu_addbottoms = (Button) findViewById(R.id.amu_addbottoms);
+        iv_phototop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //pickImageFromDBTOP();//
+                 startActivity(new Intent(activity_matchup.this, secondactivity_matchtop.class));
+            }
+        });
+        iv_photobottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(activity_matchup.this, secondactivity_matchbottom.class));
+            }
+        });
+/*        btn_amu_submit_mu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    sqLiteHelperMATCHUP.insertDataM(
+                            et_matchname.getText().toString().trim(),
+                            //et_tagB.getText().toString().trim(),
+                            MainActivity.imageViewToByte(iv_phototop),
+                            MainActivity.imageViewToByte(iv_photobottom)
+                    );
+                    toastMsg("Added successfully.");
+                    et_matchname.setText("");
+                    //et_tagB.setText("");
+                    iv_phototop.setImageResource(R.drawable.insert_photos);
+                    iv_photobottom.setImageResource(R.drawable.insert_photos);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });*/
+    }
+    public void pickImageFromDBTOP(){
+        Intent gallery = new Intent();
+        gallery.setType("image/*");
+        gallery.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(gallery, "Select Picture ..."), REQUEST_CODE_GALLERY);
+    }
 
+    private void toastMsg(String msg){
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
 
+
+/*
 
 
     @Override

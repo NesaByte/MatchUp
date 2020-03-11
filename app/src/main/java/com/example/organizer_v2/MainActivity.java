@@ -21,11 +21,12 @@ public class MainActivity extends AppCompatActivity{
     private Button btn_viewInventory;
     private Button btn_addNewItem;
     private Button btn_removeItem;*/
-    Button btn_viewInventory, btn_addNewItem;
+    Button btn_viewInventory, btn_addNewItem, btn_matchUp;
     ImageView img;
 
     public static SQLiteHelperTOPS sqLiteHelperTOPS;
     public static SQLiteHelperBOTTOMS sqLiteHelperBOTTOMS;
+    public static SQLiteHelperMATCHUP sqLiteHelperMATCHUP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity{
 
         btn_viewInventory = findViewById(R.id.btn_viewInventory);
         btn_addNewItem    = findViewById(R.id.btn_addNewItem);
+        btn_matchUp       = findViewById(R.id.btn_matchUp);
         img               = findViewById(R.id.imageView);
 
         /**
@@ -52,8 +54,20 @@ public class MainActivity extends AppCompatActivity{
 
 
         /**
-         * CREATION OF DATABASE FOR TOPS
+         * CREATION OF DATABASE FOR MATCHED TOPS AND BOTTOMS
+         *                          (int id_m, String name_m,
+         *                          String name_t, String tags_t, byte[] img_t,
+         *                          String name_b, String tags_b, byte[] img_b)
          */
+        sqLiteHelperMATCHUP = new SQLiteHelperMATCHUP(this, "DB_MATCHED.sqlite", null, 1);
+        sqLiteHelperMATCHUP.queryDataM("CREATE TABLE IF NOT EXISTS TABLE_NAME " +
+                "(id INTEGER PRIMARY KEY AUTOINCREMENT, name_m VARCHAR " +
+                //"name_t VARCHAR,  tag_t VARCHAR,
+                "image_t BLOB, " +
+                //"name_b VARCHAR, tag_b VARCHAR,
+                "image_b BLOB)");
+
+
         btn_viewInventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +79,13 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, activity_addnewitem.class));
+            }
+        });
+
+        btn_matchUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, activity_matchup.class));
             }
         });
     }

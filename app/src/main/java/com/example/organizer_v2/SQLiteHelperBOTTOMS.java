@@ -40,7 +40,7 @@ public class SQLiteHelperBOTTOMS extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         return db.rawQuery(sql, null);
     }
-
+                          //String name, String tag, byte[] image
     public void updateDataB(String name, String tag, byte[] image, int id){
         SQLiteDatabase db = getWritableDatabase();
         String sql = "UPDATE TABLE_NAME SET name = ?, tag = ?, image = ? WHERE id = ?";
