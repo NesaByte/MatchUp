@@ -1,10 +1,12 @@
 package com.example.organizer_v2;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,7 +28,7 @@ public class activity_matchup extends AppCompatActivity {
     final int REQUEST_CODE_GALLERY = 999;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matchup);
 
@@ -37,10 +39,24 @@ public class activity_matchup extends AppCompatActivity {
         iv_photobottom    = findViewById(R.id.iv_photobottom);
         btn_amu_submit_mu = findViewById(R.id.btn_amu_submit_mu);
 
+
+        try{
+            sqLiteHelperMATCHUP.insertDataM( //null, null, null
+
+                    et_matchname.getText().toString().trim(),
+                    MainActivity.imageViewToByte(iv_phototop),
+                    MainActivity.imageViewToByte(iv_photobottom)
+                    );
+            toastMsg("matchup row: ");
+
+        }catch(Exception e){
+            toastMsg("ERROR: matchup row: " + e);
+            e.printStackTrace();
+        }
+
         iv_phototop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //pickImageFromDBTOP();//
                  startActivity(new Intent(activity_matchup.this, secondactivity_matchtop.class));
             }
         });
@@ -50,15 +66,17 @@ public class activity_matchup extends AppCompatActivity {
                 startActivity(new Intent(activity_matchup.this, secondactivity_matchbottom.class));
             }
         });
-/*        btn_amu_submit_mu.setOnClickListener(new View.OnClickListener() {
+
+       btn_amu_submit_mu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    sqLiteHelperMATCHUP.insertDataM(
-                            et_matchname.getText().toString().trim(),
+                    sqLiteHelperMATCHUP.updateName(
+                            et_matchname.getText().toString().trim()
                             //et_tagB.getText().toString().trim(),
-                            MainActivity.imageViewToByte(iv_phototop),
-                            MainActivity.imageViewToByte(iv_photobottom)
+                            //MainActivity.imageViewToByte(iv_phototop),
+                            //MainActivity.imageViewToByte(iv_photobottom),
+
                     );
                     toastMsg("Added successfully.");
                     et_matchname.setText("");
@@ -69,8 +87,16 @@ public class activity_matchup extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        });*/
+        });/**/
     }
+
+  /*  @Override
+    public void onActivityResult(Intent data){
+        Uri resultUri = result.getUri();
+        iv_photo.setImageURI(resultUri);
+    }
+*/
+
     public void pickImageFromDBTOP(){
         Intent gallery = new Intent();
         gallery.setType("image/*");

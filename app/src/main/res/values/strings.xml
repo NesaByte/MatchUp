@@ -1,10 +1,10 @@
 <resources>
     <!-- activity_main -->
     <string name="app_name">MATCH IT UP</string>
-    <string name="match_up">Match Up</string>
-    <string name="view_inventory">Manipulate Inventory</string>
-    <string name="add_new_item">Add New Item</string>
-    <string name="remove_item">Remove Item</string>
+    <string name="match_up">ADD Match Up</string>
+    <string name="view_inventory">VIEW Inventory</string>
+    <string name="add_new_item">ADD New Item</string>
+    <string name="view_matchup">VIEW MatchUp</string>
     <string name="icon">icon</string>
 
     <!-- activity_addnewintem -->

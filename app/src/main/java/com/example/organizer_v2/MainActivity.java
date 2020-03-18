@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity{
     private Button btn_viewInventory;
     private Button btn_addNewItem;
     private Button btn_removeItem;*/
-    Button btn_viewInventory, btn_addNewItem, btn_matchUp;
+    Button btn_viewInventory, btn_addNewItem, btn_matchUp, btn_viewMatchUp;
     ImageView img;
 
     public static SQLiteHelperTOPS sqLiteHelperTOPS;
@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity{
         btn_viewInventory = findViewById(R.id.btn_viewInventory);
         btn_addNewItem    = findViewById(R.id.btn_addNewItem);
         btn_matchUp       = findViewById(R.id.btn_matchUp);
+        btn_viewMatchUp   =  findViewById(R.id.btn_viewMatchUp);
         img               = findViewById(R.id.imageView);
 
         /**
@@ -60,12 +61,9 @@ public class MainActivity extends AppCompatActivity{
          *                          String name_b, String tags_b, byte[] img_b)
          */
         sqLiteHelperMATCHUP = new SQLiteHelperMATCHUP(this, "DB_MATCHED.sqlite", null, 1);
-        sqLiteHelperMATCHUP.queryDataM("CREATE TABLE IF NOT EXISTS TABLE_NAME " +
-                "(id INTEGER PRIMARY KEY AUTOINCREMENT, name_m VARCHAR " +
-                //"name_t VARCHAR,  tag_t VARCHAR,
-                "image_t BLOB, " +
-                //"name_b VARCHAR, tag_b VARCHAR,
-                "image_b BLOB)");
+        sqLiteHelperMATCHUP.queryDataM("CREATE TABLE IF NOT EXISTS DB_MATCHED " +
+                "(id INTEGER PRIMARY KEY AUTOINCREMENT, name_m VARCHAR, image_t BLOB, image_b BLOB)");
+
 
 
         btn_viewInventory.setOnClickListener(new View.OnClickListener() {
@@ -82,12 +80,22 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+
         btn_matchUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, activity_matchup.class));
             }
         });
+
+        btn_viewMatchUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, activity_viewmatchup.class));
+            }
+        });
+
+
     }
 
     public static byte[] imageViewToByte(ImageView image){

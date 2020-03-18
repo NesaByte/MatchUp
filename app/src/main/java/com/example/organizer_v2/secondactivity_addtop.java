@@ -45,7 +45,7 @@ public class secondactivity_addtop extends AppCompatActivity {
 
         et_name =         findViewById(R.id.et_name);
         et_tag  =         findViewById(R.id.et_tag);
-        iv_photo =  findViewById(R.id.iv_photo);
+        iv_photo =        findViewById(R.id.iv_photo);
         btn_addtops_add =     findViewById(R.id.btn_addtops_add);
 
         iv_photo.setOnClickListener(new View.OnClickListener() {
@@ -56,16 +56,7 @@ public class secondactivity_addtop extends AppCompatActivity {
                         REQUEST_CODE_GALLERY);
             }
         });
- /*       sqLiteHelperTOPS = new SQLiteHelperTOPS(this, "DB_TOPS.sqlite", null, 1);
 
-        sqLiteHelperTOPS.queryData("CREATE TABLE IF NOT EXISTS TABLE_NAME " +
-                "(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, tag VARCHAR, image BLOB)");
-*/
-
-        /*sqLiteHelperTOPS = new SQLiteHelperTOPS(this, "DBTOPS.sqlite", null, 1);
-        sqLiteHelperTOPS.queryData("CREATE TABLE IF NOT EXISTS TABLE_NAME "
-                + "(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, tag VARCHAR, image BLOB)");
-*/
         btn_addtops_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +71,7 @@ public class secondactivity_addtop extends AppCompatActivity {
                     et_tag.setText("");
                     iv_photo.setImageResource(R.drawable.insert_photos);
                 } catch (Exception e) {
+                    toastMsg("Error: " + e);
                     e.printStackTrace();
                 }
             }

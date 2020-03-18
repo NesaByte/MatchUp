@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -36,12 +37,21 @@ public class SQLiteHelperTOPS extends SQLiteOpenHelper {
         sqLiteStatement.bindString(2, tag);
         sqLiteStatement.bindBlob(3, image);
         sqLiteStatement.executeInsert();
+
     }
 
     public Cursor getData(String sql) {
         SQLiteDatabase db = getReadableDatabase();
         return db.rawQuery(sql, null);
     }
+
+    public Cursor getDataImg(String sql) {
+        SQLiteDatabase db = getReadableDatabase();
+        return db.rawQuery(sql, null);
+    }
+
+
+
 
     public void updateData(String name, String tag, byte[] image, int id){
         SQLiteDatabase db = getWritableDatabase();

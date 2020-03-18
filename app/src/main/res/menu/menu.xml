@@ -18,8 +18,8 @@
         app:showAsAction="never"
         />
 
-    <item android:id="@+id/btn_removeItem"
-        android:title="@string/remove_item"
+    <item android:id="@+id/btn_viewMatchUp"
+        android:title="@string/view_matchup"
         app:showAsAction="never"
         />
 </menu>
