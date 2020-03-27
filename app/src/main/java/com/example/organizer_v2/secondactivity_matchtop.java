@@ -38,6 +38,8 @@ import static com.example.organizer_v2.MainActivity.sqLiteHelperTOPS;
 
 public class secondactivity_matchtop extends AppCompatActivity {
 
+    static final int PICK_REQUEST = 0;
+
     SearchView sv_searchView;
     ListView lv_listView;
     ArrayList<Model> mList;
@@ -60,6 +62,9 @@ public class secondactivity_matchtop extends AppCompatActivity {
         mList = new ArrayList<>();
         mAdapter = new adapter_viewtop(this, R.layout.row_layout, mList);
         lv_listView.setAdapter(mAdapter);
+
+        //Intent iin= getIntent();
+        //Bundle b = iin.getExtras();
 
         sv_searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         sv_searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -104,13 +109,13 @@ public class secondactivity_matchtop extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         if(which == 0){
                             Cursor c = sqLiteHelperTOPS.getData("SELECT id FROM TABLE_NAME");
-                            toastMsg("long click pick 1: " + position);
+                            //toastMsg("long click pick 1: " + position);
 
                             ArrayList<Integer> arrID = new ArrayList<>();
                             while (c.moveToNext()) {
                                 arrID.add(c.getInt(0));
                             }
-                            toastMsg("long click pick 2: " + position);
+                            //toastMsg("long click pick 2: " + position);
 
                             showDialogRead(secondactivity_matchtop.this, arrID.get(position));
 
@@ -118,12 +123,12 @@ public class secondactivity_matchtop extends AppCompatActivity {
 
                         if(which == 1){
                             Cursor c = sqLiteHelperTOPS.getData("SELECT id FROM TABLE_NAME");
-                            toastMsg("long click pick 1: " + position);
+                            //toastMsg("long click pick 1: " + position);
                             ArrayList<Integer> arrayList_id = new ArrayList<>();
                             while(c.moveToNext()){
                                 arrayList_id.add(c.getInt(0));
                             }
-                            toastMsg("ong click pick 2: " + position);
+                            //toastMsg("ong click pick 2: " + position);
                             //showDialogPick(arrayList_id.get(position));
                             showDialogPick(secondactivity_matchtop.this, arrayList_id.get(position));
 
@@ -192,23 +197,26 @@ public class secondactivity_matchtop extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 Cursor cursor = sqLiteHelperTOPS.getData(
                         "SELECT * FROM TABLE_NAME WHERE id = " + position);
-                toastMsg("dialog pick: " + position);
+                //toastMsg("dialog pick: " + position);
 
                 try {
-                    toastMsg("trying dialog pick: " + position);
-                    mList.clear();
+                    //toastMsg("trying dialog pick: " + position);
+                    /*mList.clear();
                     while (cursor.moveToNext()) {
                         int id = cursor.getInt(0);
                         byte[] img = cursor.getBlob(3);
                         //iv_photo.setImageBitmap(BitmapFactory.decodeByteArray(img, 0, img.length));
 
-
-                        toastMsg("trying dialog pick id: " + id);
-                        toastMsg("trying dialog pick img.L: " + img.length);
+                        //toastMsg("trying dialog pick id: " + id);
+                        //toastMsg("trying dialog pick img.L: " + img.length);
 
                         sqLiteHelperMATCHUP.updateTop(img,position);
-                        toastMsg("Picked Successfully.");
-                    }
+                    }*/
+                    Intent i = new Intent();
+                    i.putExtra("idtop",  position);
+                    setResult(RESULT_OK, i);
+                    toastMsg("Top Picked Successfully.");
+                    finish();
                 } catch (Exception e) {
                     Log.e("Pick error: ", e.getMessage());
                 }
@@ -244,13 +252,7 @@ public class secondactivity_matchtop extends AppCompatActivity {
     private void toastMsg(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == RESULT_OK){
-            Uri resultUri = data.getData();
-            iv_photo.setImageURI(resultUri);
-        }
-    }
+
 /*@Override
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
       if(resultCode == RESULT_OK){

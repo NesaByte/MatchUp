@@ -60,6 +60,19 @@ public class SQLiteHelperMATCHUP extends SQLiteOpenHelper {
 
     }
 
+    /*public int getID(byte[] image_t, byte[] image_b){
+        SQLiteDatabase db = getReadableDatabase();
+        String sql = "SELECT id FROM DB_MATCHED WHERE image_t = ? and image_b = ?";
+        SQLiteStatement sqLiteStatement = db.compileStatement(sql);
+
+        sqLiteStatement.clearBindings();
+        sqLiteStatement.bindBlob(1, image_t);
+        sqLiteStatement.bindBlob(2, image_b);
+
+        String idthis = sqLiteStatement.execute();
+        return idthis;
+    }*/
+
     public Cursor getDataM(String sql) {
         SQLiteDatabase db = getReadableDatabase();
         return db.rawQuery(sql, null);
@@ -91,13 +104,16 @@ public class SQLiteHelperMATCHUP extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void updateName(String name_m){
+    public void updateName(String name_m, byte[] image_t, byte[] image_b){
         SQLiteDatabase db = getWritableDatabase();
-        String sql = "UPDATE DB_MATCHED SET name_m = ? WHERE id = ?";
+        String sql = "UPDATE DB_MATCHED SET name_m = ? WHERE image_t = ? and image_b = ?";
         SQLiteStatement sqLiteStatement = db.compileStatement(sql);
         sqLiteStatement.bindString(1, name_m);
+        sqLiteStatement.bindBlob(2, image_t);
+        sqLiteStatement.bindBlob(3, image_b);
         sqLiteStatement.execute();
         db.close();
+
     }
 
     public void updateDataM(String name_m,
@@ -150,6 +166,7 @@ public class SQLiteHelperMATCHUP extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
 
     }
+
 
 
     @Override

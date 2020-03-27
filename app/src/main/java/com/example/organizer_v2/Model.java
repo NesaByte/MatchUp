@@ -4,7 +4,7 @@ public class Model {
     private int id;
     private String name, tags;
     private byte[] image;
-
+//id, name, tag, image
     public Model(int i, String n, String t, byte[] img){ //id, name, tag, image)
         this.id = i;
         this.name = n;

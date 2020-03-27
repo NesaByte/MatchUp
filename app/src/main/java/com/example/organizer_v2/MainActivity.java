@@ -4,12 +4,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 
@@ -64,6 +66,8 @@ public class MainActivity extends AppCompatActivity{
         sqLiteHelperMATCHUP.queryDataM("CREATE TABLE IF NOT EXISTS DB_MATCHED " +
                 "(id INTEGER PRIMARY KEY AUTOINCREMENT, name_m VARCHAR, image_t BLOB, image_b BLOB)");
 
+    fixmatch();
+
 
 
         btn_viewInventory.setOnClickListener(new View.OnClickListener() {
@@ -105,6 +109,27 @@ public class MainActivity extends AppCompatActivity{
         byte[] byteArr = stream.toByteArray();
         return byteArr;
     }
+
+    public static void fixmatch(){
+        Cursor cursor = sqLiteHelperMATCHUP.getDataM(
+                "SELECT * FROM DB_MATCHED");
+
+        while(cursor.moveToNext()){
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            byte[] image_t = cursor.getBlob(2);
+            byte[] image_b = cursor.getBlob(3);
+
+            if (    name.length()< 1 ||
+                    image_t.toString().length() == 109 ||
+                    image_t.toString().length() == 117 ||
+                    image_b.toString().length() == 112 ||
+                    image_b.toString().length() == 121){
+                sqLiteHelperMATCHUP.deleteDataM(id);
+                //toastMsg("fixed: " + id);
+            }
+        }
+    }
 /*
     @Override
     public void onClick(View v){
@@ -127,4 +152,8 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 */
+private void toastMsg(String msg){
+    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+}
+
 }

@@ -77,17 +77,10 @@ public class secondactivity_addtop extends AppCompatActivity {
             }
         });
     }
-/*
-    public static byte[] imageViewToByte(ImageView image){
-        Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArr = stream.toByteArray();
-        return byteArr;
-    }
-*/
+
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         if (requestCode == REQUEST_CODE_GALLERY) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 pickImageFromGallery();
@@ -103,7 +96,8 @@ public class secondactivity_addtop extends AppCompatActivity {
         Intent gallery = new Intent();
         gallery.setType("image/*");
         gallery.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(gallery, "Select Picture ..."), REQUEST_CODE_GALLERY);
+        startActivityForResult(Intent.createChooser(gallery, "Select Picture ..."),
+                REQUEST_CODE_GALLERY);
     }
 
     @Override

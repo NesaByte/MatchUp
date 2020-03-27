@@ -93,13 +93,13 @@ public class secondactivity_matchbottom extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         if(which == 0){
                             Cursor c = sqLiteHelperBOTTOMS.getDataB("SELECT id FROM TABLE_NAME");
-                            toastMsg("long click pick 1: " + position);
+                            //toastMsg("long click pick 1: " + position);
 
                             ArrayList<Integer> arrID = new ArrayList<>();
                             while (c.moveToNext()) {
                                 arrID.add(c.getInt(0));
                             }
-                            toastMsg("long click pick 2: " + position);
+                            //toastMsg("long click pick 2: " + position);
 
                             showDialogRead(secondactivity_matchbottom.this, arrID.get(position));
 
@@ -107,12 +107,12 @@ public class secondactivity_matchbottom extends AppCompatActivity {
 
                         if(which == 1){
                             Cursor c = sqLiteHelperBOTTOMS.getDataB("SELECT id FROM TABLE_NAME");
-                            toastMsg("long click pick 1: " + position);
+                            //toastMsg("long click pick 1: " + position);
                             ArrayList<Integer> arrayList_id = new ArrayList<>();
                             while(c.moveToNext()){
                                 arrayList_id.add(c.getInt(0));
                             }
-                            toastMsg("ong click pick 2: " + position);
+                            //toastMsg("ong click pick 2: " + position);
                             //showDialogPick(arrayList_id.get(position));
                             showDialogPick(secondactivity_matchbottom.this, arrayList_id.get(position));
 
@@ -176,23 +176,28 @@ public class secondactivity_matchbottom extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 Cursor cursor = sqLiteHelperBOTTOMS.getDataB(
                         "SELECT * FROM TABLE_NAME WHERE id = " + position);
-                toastMsg("dialog pick: " + position);
+                //toastMsg("dialog pick: " + position);
 
                 try {
-                    toastMsg("trying dialog pick: " + position);
-                    mList.clear();
+                    //toastMsg("trying dialog pick: " + position);
+                    /*mList.clear();
                     while (cursor.moveToNext()) {
                         int id = cursor.getInt(0);
                         byte[] img = cursor.getBlob(3);
                         //iv_photo.setImageBitmap(BitmapFactory.decodeByteArray(img, 0, img.length));
 
 
-                        toastMsg("trying dialog pick id: " + id);
-                        toastMsg("trying dialog pick img.L: " + img.length);
+                        //toastMsg("trying dialog pick id: " + id);
+                        //toastMsg("trying dialog pick img.L: " + img.length);
 
                         sqLiteHelperMATCHUP.updateBottom(img,position);
                         toastMsg("Picked Successfully.");
-                    }
+                    }*/
+                    Intent i = new Intent();
+                    i.putExtra("idbottom",  position);
+                    setResult(RESULT_OK, i);
+                    toastMsg("Bottom Picked Successfully.");
+                    finish();
                 } catch (Exception e) {
                     Log.e("Pick error: ", e.getMessage());
                 }

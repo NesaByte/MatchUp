@@ -13,7 +13,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import static com.example.organizer_v2.MainActivity.sqLiteHelperMATCHUP;
-import static com.example.organizer_v2.MainActivity.sqLiteHelperTOPS;
 
 public class activity_viewmatchup extends AppCompatActivity {
 
@@ -30,6 +29,8 @@ public class activity_viewmatchup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewmatchup);
 
+        MainActivity.fixmatch();
+
         sv_searchView = findViewById(R.id.sv_searchView);
         lv_listView = findViewById(R.id.lv_listView);
         mList = new ArrayList<>();
@@ -37,6 +38,7 @@ public class activity_viewmatchup extends AppCompatActivity {
         lv_listView.setAdapter(mAdapter);
 
         sv_searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
         sv_searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -60,12 +62,12 @@ public class activity_viewmatchup extends AppCompatActivity {
             byte[] image_b = cursor.getBlob(3);
 
             mList.add(new Model_matched(id, name_m, image_t, image_b));
-            toastMsg("match name is>> " + name_m);
+/**/             toastMsg("match name is>> " + name_m);
         }
-        //mAdapter.notifyDataSetChanged();
+       mAdapter.notifyDataSetChanged();
 
         if (mList.size() == 0) {
-            toastMsg("Empty tops");
+            toastMsg("Empty matchups");
         }
     }
     private void toastMsg(String msg){
