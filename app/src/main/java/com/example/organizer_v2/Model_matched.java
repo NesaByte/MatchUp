@@ -1,30 +1,38 @@
 package com.example.organizer_v2;
 
 public class Model_matched {
-    private int id;
+    private int id_m;
     private String name_m;//,nameTOP, nameBOTTOM, tagsTOP, tagsBOTTOM;
     private byte[] image_t, image_b;
-//(id, name_m, image_t, image_b)
-    public Model_matched(int id_m,
-                         String name_m,
-                         byte[] img_t,
-                         byte[] img_b
+
+    //mmList.add(new Model_matched(id, name_m, image_t, image_b));
+
+    public Model_matched(int i,
+                         String n,
+                         byte[] t,
+                         byte[] b
                         )
     {
-        this.id         = id_m;
-        this.name_m     = name_m;
-        this.image_t    = img_t;
-        this.image_b    = img_b;
+        this.id_m       = i;
+        this.name_m     = n;
+        this.image_t    = t;
+        this.image_b    = b;
     }
 
+    public int getId_m() {
+        return id_m;
+    }
 
-    public int getIdMATCH(){return id;}
-    public String getNameMATCHED() {return name_m;}
-    //public String getNameTOP() {return nameTOP;}
-    //public String getNameBOTTOM() {return nameBOTTOM;}
-    //public String getTagsTOP() {return tagsTOP;}
-    //public String getTagsBOTTOM() {return tagsBOTTOM;}
-    public byte[] getImageTOP() {return image_t;}
-    public byte[] getImageBOTTOM() {return image_b;}
+    public String getName_m() {
+        return name_m;
+    }
+
+    public byte[] getImage_t() {
+        return image_t;
+    }
+
+    public byte[] getImage_b() {
+        return image_b;
+    }
 
 }

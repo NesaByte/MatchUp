@@ -1,9 +1,11 @@
 package com.example.organizer_v2;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -18,55 +20,62 @@ public class activity_viewmatchup extends AppCompatActivity {
 
     SearchView sv_searchView;
     ListView lv_listView;
-    ArrayList<Model_matched> mList;
-    adapter_viewmatch mAdapter = null;
+    ArrayList<Model_matched> mmList;
+    adapter_viewmatch mmAdapter = null;
 
-    ImageView iv_phototop;
-    ImageView iv_photobottom;
+    //ImageView iv_phototop;
+    //ImageView iv_photobottom;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewmatchup);
 
-        MainActivity.fixmatch();
+        //MainActivity.fixmatch();
 
         sv_searchView = findViewById(R.id.sv_searchView);
         lv_listView = findViewById(R.id.lv_listView);
-        mList = new ArrayList<>();
-        mAdapter = new adapter_viewmatch(this, R.layout.row_layout_matchup, mList);
-        lv_listView.setAdapter(mAdapter);
+        mmList = new ArrayList<>();
+        mmAdapter = new adapter_viewmatch(this, R.layout.row_layout_matchup, mmList);
+        lv_listView.setAdapter(mmAdapter);
 
-        sv_searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
+        //sv_searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         sv_searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                mAdapter.getFilter().filter(query);
+                mmAdapter.getFilter().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                mAdapter.getFilter().filter(newText);
+                mmAdapter.getFilter().filter(newText);
                 return false;
             }
         });
 
         Cursor cursor = sqLiteHelperMATCHUP.getDataM("SELECT * FROM DB_MATCHED");
-        mList.clear();
+        mmList.clear();
         while (cursor.moveToNext()) {
             int id = cursor.getInt(0);
             String name_m = cursor.getString(1);
             byte[] image_t = cursor.getBlob(2);
             byte[] image_b = cursor.getBlob(3);
 
-            mList.add(new Model_matched(id, name_m, image_t, image_b));
-/**/             toastMsg("match name is>> " + name_m);
-        }
-       mAdapter.notifyDataSetChanged();
+            try{
+            mmList.add(new Model_matched(id, name_m, image_t, image_b));
+                toastMsg("match name is>> " + id + image_t.length);
+                toastMsg("match name is>> " + name_m+image_b.length);
+            }catch (Exception e) {
+                Log.e("Cursor error: ", e.getMessage());
+            }
 
-        if (mList.size() == 0) {
+        }
+
+       mmAdapter.notifyDataSetChanged();
+
+        if (mmList.size() == 0) {
             toastMsg("Empty matchups");
         }
     }

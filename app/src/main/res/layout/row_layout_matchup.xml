@@ -9,15 +9,15 @@
 
     <ImageView
         android:id="@+id/iv_phototop"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:src="@drawable/insert_photos"
         android:contentDescription="@string/view_matchup"/>
 
     <ImageView
         android:id="@+id/iv_photobottom"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:src="@drawable/insert_photos"
         android:contentDescription="@string/view_matchup"/>
 
@@ -33,7 +33,7 @@
             android:id="@+id/tv_name_m"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_matchname"
+            android:hint="Matchname"
             android:textStyle="bold"/>
 
 

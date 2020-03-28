@@ -3,6 +3,7 @@ package com.example.organizer_v2;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,27 +16,27 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class adapter_viewmatch extends BaseAdapter implements Filterable {
-    private Context context;
-    private int layout;
-    private ArrayList<Model_matched> list;
+    private Context mcontext;
+    private int mlayout;
+    private ArrayList<Model_matched> mlist;
 
-    ArrayList<Model_matched> mValue;
-    ValueFilter valueFilter;
+    ArrayList<Model_matched> mmValue;
+    ValueFilterM mvalueFilter;
 
     public adapter_viewmatch(Context context, int layout, ArrayList<Model_matched> list) {
-        this.context = context;
-        this.layout = layout;
-        this.list = list;
+        this.mcontext = context;
+        this.mlayout = layout;
+        this.mlist = list;
 
-        mValue = list;
+        mmValue = list;
     }
 
     @Override
-    public int getCount(){return list.size();}
+    public int getCount(){return mlist.size();}
 
     @Override
     public Object getItem(int position) {
-        return list.get(position);
+        return mlist.get(position);
     }
 
     @Override
@@ -43,7 +44,7 @@ public class adapter_viewmatch extends BaseAdapter implements Filterable {
         return position;
     }
 
-    private class ViewHolder{
+    private class ViewHolderM{
         TextView tv_name_m;
         ImageView iv_phototop, iv_photobottom;
     }
@@ -52,54 +53,60 @@ public class adapter_viewmatch extends BaseAdapter implements Filterable {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View row = convertView;
-        adapter_viewmatch.ViewHolder holder = new adapter_viewmatch.ViewHolder();
+        //adapter_viewmatch.ViewHolder holder = new adapter_viewmatch.ViewHolder();
+        ViewHolderM holder = new ViewHolderM();
 
         if (row == null) {
-            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = inflater.inflate(layout, null);
-            holder.tv_name_m = row.findViewById(R.id.tv_name);
+            LayoutInflater inflater = (LayoutInflater)mcontext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            row = inflater.inflate(mlayout, null);
+            holder.tv_name_m = row.findViewById(R.id.tv_name_m);
             holder.iv_phototop = row.findViewById(R.id.iv_phototop);
             holder.iv_photobottom = row.findViewById(R.id.iv_photobottom);
             row.setTag(holder);
         } else {
-            holder = (adapter_viewmatch.ViewHolder)row.getTag();
+            holder = (ViewHolderM)row.getTag();
         }
 
-        Model_matched model_matched = list.get(position);
+        try{
+            Model_matched mm= mlist.get(position);
 
-        holder.tv_name_m.setText(model_matched.getNameMATCHED());
+            holder.tv_name_m.setText(mm.getName_m());
 
-        byte[] imagetop = model_matched.getImageTOP();
-        Bitmap bitmaptop = BitmapFactory.decodeByteArray(imagetop, 0, imagetop.length);
-        holder.iv_phototop.setImageBitmap(bitmaptop);
+            byte[] imagetop = mm.getImage_t();
+            Bitmap bitmaptop = BitmapFactory.decodeByteArray(imagetop, 0, imagetop.length);
+            holder.iv_phototop.setImageBitmap(bitmaptop);
 
-        byte[] imagebottom = model_matched.getImageBOTTOM();
-        Bitmap bitmapbottom = BitmapFactory.decodeByteArray(imagebottom, 0, imagebottom.length);
-        holder.iv_phototop.setImageBitmap(bitmapbottom);
+            byte[] imagebottom = mm.getImage_b();
+            Bitmap bitmapbottom = BitmapFactory.decodeByteArray(imagebottom, 0, imagebottom.length);
+            holder.iv_photobottom.setImageBitmap(bitmapbottom);
+        }catch (Exception e) {
+            Log.e("GetView error: ", e.getMessage());
+        }
+
 
         return row;
     }
     @Override
     public Filter getFilter() {
-        if (valueFilter == null) {
-            valueFilter = new adapter_viewmatch.ValueFilter();
+        if (mvalueFilter == null) {
+            mvalueFilter = new ValueFilterM();
         }
-        return valueFilter;
+        return mvalueFilter;
     }
 
-    private class ValueFilter extends Filter {
+    private class ValueFilterM extends Filter {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
 
             if (constraint != null || constraint.length() > 0) {
                 ArrayList<Model_matched> filterList = new ArrayList<>();
-                for (int i = 0; i < mValue.size(); i++) {
-                    if ((mValue.get(i).getNameMATCHED().toUpperCase()).contains(constraint.toString().toUpperCase())) {
-                        Model_matched model_matched = new Model_matched(mValue.get(i).getIdMATCH(),
-                                mValue.get(i).getNameMATCHED(),
-                                mValue.get(i).getImageTOP(),
-                                mValue.get(i).getImageBOTTOM());
+                for (int i = 0; i < mmValue.size(); i++) {
+                    if ((mmValue.get(i).getName_m().toUpperCase()).contains(constraint.toString().toUpperCase())) {
+                        Model_matched model_matched = new Model_matched(mmValue.get(i).getId_m(),
+                                mmValue.get(i).getName_m(),
+                                mmValue.get(i).getImage_t(),
+                                mmValue.get(i).getImage_b());
                         filterList.add(model_matched);
                     }
                 }
@@ -111,7 +118,7 @@ public class adapter_viewmatch extends BaseAdapter implements Filterable {
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            list = (ArrayList<Model_matched>) results.values;
+            mlist = (ArrayList<Model_matched>) results.values;
             notifyDataSetChanged();
         }
     }
