@@ -9,15 +9,15 @@
 
     <ImageView
         android:id="@+id/iv_phototop"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:src="@drawable/insert_photos"
         android:contentDescription="@string/view_matchup"/>
 
     <ImageView
         android:id="@+id/iv_photobottom"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:src="@drawable/insert_photos"
         android:contentDescription="@string/view_matchup"/>
 

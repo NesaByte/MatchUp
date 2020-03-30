@@ -41,30 +41,11 @@ public class activity_matchup extends AppCompatActivity {
 
 
         MainActivity.fixmatch();
-/*        try{
-            sqLiteHelperMATCHUP.insertDataM( //null, null, null
-
-                    "",
-                    MainActivity.imageViewToByte(iv_phototop),
-                    MainActivity.imageViewToByte(iv_photobottom)
-                    );
-            toastMsg("iv_photo length: "+ iv_phototop.toString().length());
-            toastMsg("iv_bottom length: "+ iv_photobottom.toString().length());
-
-        }catch(Exception e){
-            toastMsg("ERROR: matchup row: " + e);
-            e.printStackTrace();
-        }
-*/
+/* */
         iv_phototop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                  startActivityForResult(new Intent(activity_matchup.this, secondactivity_matchtop.class), TOP_REQUEST);
-                /*int idtop = top;//getText().toString();
-
-                Intent ii=new Intent(activity_matchup.this, secondactivity_matchtop.class);
-                ii.getExtra("id", idtop);
-                startActivity(ii);*/
 
             }
         });
@@ -220,59 +201,4 @@ public class activity_matchup extends AppCompatActivity {
     private void toastMsg(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
-
-
-
-/*
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
-
-
-            case R.id.btn_matchUp:
-                break;
-
-            case R.id.btn_addNewItem:
-                actionAddNewItem();
-                break;
-
-            case R.id.btn_viewInventory:
-                actionViewInventory();
-                break;
-
-            case R.id.btn_removeItem:
-                actionRemoveItem();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void actionViewInventory(){
-        Intent i = new Intent(activity_matchup.this, activity_viewinventory.class);
-        startActivity(i);
-    }
-
-    private void actionAddNewItem(){
-        Intent i = new Intent(activity_matchup.this, activity_addnewitem.class);
-        startActivity(i);
-    }
-
-    private void actionRemoveItem(){
-        Intent i = new Intent(activity_matchup.this, activity_removeitem.class);
-        startActivity(i);
-    }
-/*
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_matchup);
-    }*/
 }

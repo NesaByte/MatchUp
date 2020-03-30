@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity_viewmatchup"></activity>
+        <activity android:name=".secondactivity_viewmatchbottom_update"></activity>
+        <activity android:name=".secondactivity_viewmatchtop_update" />
+        <activity android:name=".activity_viewmatchup" />
         <activity android:name=".secondactivity_matchbottom" />
         <activity android:name=".secondactivity_matchtop" />
         <activity android:name=".secondactivity_viewbottom" />

@@ -19,7 +19,7 @@
     <string name="hint_matchname"> Name this MatchUp</string>
     <string name="cancel">Cancel</string>
     <string name="takepic">Take Picture</string>
-    <string name="upload">Upload</string>
+    <string name="upload">Update</string>
     <string name="remove">Remove Items</string>
     <string name="search">Quick Search</string>
     <string name="todo">DO ME</string>

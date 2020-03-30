@@ -1,60 +1,52 @@
 package com.example.organizer_v2;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.theartofdev.edmodo.cropper.CropImage;
-
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
+import static com.example.organizer_v2.MainActivity.sqLiteHelperMATCHUP;
 import static com.example.organizer_v2.MainActivity.sqLiteHelperTOPS;
 
-public class secondactivity_matchtop extends AppCompatActivity {
+public class secondactivity_viewmatchtop_update extends AppCompatActivity {
+
     SearchView sv_searchView;
     ListView lv_listView;
-    ArrayList<Model> mList;
-    adapter_viewtop mAdapter = null;
+    ArrayList<Model> mmList;
+    adapter_viewtop mmAdapter = null;
 
     ImageView iv_photo;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_secondmatchtop);
+        setContentView(R.layout.activity_secondviewmatchtop_update);
 
         getSupportActionBar().setTitle("Pick a top for this match");
 
         sv_searchView = findViewById(R.id.sv_searchView);
         lv_listView = findViewById(R.id.lv_listView);
-        mList = new ArrayList<>();
-        mAdapter = new adapter_viewtop(this, R.layout.row_layout, mList);
-        lv_listView.setAdapter(mAdapter);
+        mmList = new ArrayList<>();
+        mmAdapter = new adapter_viewtop(this, R.layout.row_layout, mmList);
+        lv_listView.setAdapter(mmAdapter);
 
         //Intent iin= getIntent();
         //Bundle b = iin.getExtras();
@@ -63,30 +55,30 @@ public class secondactivity_matchtop extends AppCompatActivity {
         sv_searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                mAdapter.getFilter().filter(query);
+                mmAdapter.getFilter().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                mAdapter.getFilter().filter(newText);
+                mmAdapter.getFilter().filter(newText);
                 return false;
             }
         });
 
         Cursor cursor = sqLiteHelperTOPS.getDataImg("SELECT * FROM TABLE_NAME");
-        mList.clear();
+        mmList.clear();
         while (cursor.moveToNext()) {
             int id = cursor.getInt(0);
             String name = cursor.getString(1);
             String tag = cursor.getString(2);
             byte[] image = cursor.getBlob(3);
 
-            mList.add(new Model(id, name, tag, image));
+            mmList.add(new Model(id, name, tag, image));
         }
-        mAdapter.notifyDataSetChanged();
+        mmAdapter.notifyDataSetChanged();
 
-        if (mList.size() == 0) {
+        if (mmList.size() == 0) {
             toastMsg("Empty tops");
         }
 
@@ -95,14 +87,13 @@ public class secondactivity_matchtop extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 final CharSequence[] items = {"View details", "Pick this top"};
 
-                AlertDialog.Builder dialog = new AlertDialog.Builder(secondactivity_matchtop.this);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(secondactivity_viewmatchtop_update.this);
                 dialog.setTitle("What do you want to do?");
                 dialog.setItems(items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if(which == 0){
                             Cursor c = sqLiteHelperTOPS.getData("SELECT id FROM TABLE_NAME");
-                            //toastMsg("long click pick 1: " + position);
 
                             ArrayList<Integer> arrID = new ArrayList<>();
                             while (c.moveToNext()) {
@@ -110,7 +101,7 @@ public class secondactivity_matchtop extends AppCompatActivity {
                             }
                             //toastMsg("long click pick 2: " + position);
 
-                            showDialogRead(secondactivity_matchtop.this, arrID.get(position));
+                            showDialogRead(secondactivity_viewmatchtop_update.this, arrID.get(position));
 
                         }
 
@@ -123,7 +114,7 @@ public class secondactivity_matchtop extends AppCompatActivity {
                             }
                             //toastMsg("ong click pick 2: " + position);
                             //showDialogPick(arrayList_id.get(position));
-                            showDialogPick(secondactivity_matchtop.this, arrayList_id.get(position));
+                            showDialogPick(secondactivity_viewmatchtop_update.this, arrayList_id.get(position));
 
                         }
 
@@ -133,7 +124,6 @@ public class secondactivity_matchtop extends AppCompatActivity {
                 return true;
             }
         });
-
     }
 
     private void showDialogRead(Activity activity, final int position) {
@@ -148,7 +138,7 @@ public class secondactivity_matchtop extends AppCompatActivity {
 
         Cursor cursor = sqLiteHelperTOPS.getData(
                 "SELECT * FROM TABLE_NAME WHERE id = " + position);
-        mList.clear();
+        mmList.clear();
         while (cursor.moveToNext()) {
             int id = cursor.getInt(0);
             String name = cursor.getString(1);
@@ -175,12 +165,8 @@ public class secondactivity_matchtop extends AppCompatActivity {
 
     }
 
-
     private void showDialogPick(Activity activity, final int position) {
-        //final Dialog dialogPick = new Dialog(activity);
-
-
-        AlertDialog.Builder dialogPick = new AlertDialog.Builder(secondactivity_matchtop.this);
+        AlertDialog.Builder dialogPick = new AlertDialog.Builder(secondactivity_viewmatchtop_update.this);
 
         dialogPick.setTitle("Picking this top");
         dialogPick.setMessage("Are you sure you want to pick this top?");
@@ -193,18 +179,6 @@ public class secondactivity_matchtop extends AppCompatActivity {
                 //toastMsg("dialog pick: " + position);
 
                 try {
-                    //toastMsg("trying dialog pick: " + position);
-                    /*mList.clear();
-                    while (cursor.moveToNext()) {
-                        int id = cursor.getInt(0);
-                        byte[] img = cursor.getBlob(3);
-                        //iv_photo.setImageBitmap(BitmapFactory.decodeByteArray(img, 0, img.length));
-
-                        //toastMsg("trying dialog pick id: " + id);
-                        //toastMsg("trying dialog pick img.L: " + img.length);
-
-                        sqLiteHelperMATCHUP.updateTop(img,position);
-                    }*/
                     Intent i = new Intent();
                     i.putExtra("idtop",  position);
                     setResult(RESULT_OK, i);
@@ -230,31 +204,21 @@ public class secondactivity_matchtop extends AppCompatActivity {
 
     private void updateListData() {
         Cursor cursor = sqLiteHelperTOPS.getData("SELECT * FROM TABLE_NAME");
-        mList.clear();
+        mmList.clear();
         while (cursor.moveToNext()) {
             int id = cursor.getInt(0);
             String name = cursor.getString(1);
             String tag = cursor.getString(2);
             byte[] image = cursor.getBlob(3);
 
-            mList.add(new Model(id, name, tag, image));
+            mmList.add(new Model(id, name, tag, image));
         }
-        mAdapter.notifyDataSetChanged();
+        mmAdapter.notifyDataSetChanged();
     }
+
 
     private void toastMsg(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
-/*@Override
-  public void onActivityResult(int requestCode, int resultCode, Intent data) {
-      if(resultCode == RESULT_OK){
-          Uri resultUri = data.getData();
-          iv_phototop.setImageURI(resultUri);
-
-          Uri resultUriB = data.getData();
-          iv_photobottom.setImageURI(resultUriB);
-      }
-      super.onActivityResult(requestCode, resultCode, data);
-  }*/
-    }
+}
