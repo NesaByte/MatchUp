@@ -1,6 +1,5 @@
 package com.example.organizer_v2;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;

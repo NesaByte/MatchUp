@@ -26,8 +26,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import static com.example.organizer_v2.MainActivity.sqLiteHelperBOTTOMS;
-import static com.example.organizer_v2.MainActivity.sqLiteHelperMATCHUP;
-
 
 public class secondactivity_matchbottom extends AppCompatActivity {
 
