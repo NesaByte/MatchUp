@@ -1,4 +1,4 @@
-/** This is a
+/** This is an SQLHelper that helps the programmer to manipulate or take values from the TOP database
  *    @author Nesa Bertanico
  *    @version 1.0
  */
@@ -10,31 +10,27 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
-
 import androidx.annotation.Nullable;
 
-/**
- *
- */
 public class SQLiteHelperTOPS extends SQLiteOpenHelper {
 
 
     /**
-     *
+     * a constructor
+     * @param context
+     * @param name
+     * @param cursorFactory
+     * @param version
      */
-    private static final String TAG = "SQLiteHelperTOPS";
-    //public static final String DB_NAME = "TOPS.DB";
-//sqLiteHelperTOPS = new SQLiteHelperTOPS(this, "DB_TOPS.sqlite", null, 1);
     SQLiteHelperTOPS(@Nullable Context context,
                      String name,
                      SQLiteDatabase.CursorFactory cursorFactory,
                      int version){
         super(context, name, cursorFactory, version);
     }
-//  "(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, tag VARCHAR, image BLOB)");
 
     /**
-     *
+     * accepts an string of SQL command to be executed and performed for the database
      * @param sql
      */
     public void queryData(String sql){
@@ -43,7 +39,7 @@ public class SQLiteHelperTOPS extends SQLiteOpenHelper {
     }
 
     /**
-     *
+     * method inserts new row of data into the database
      * @param name
      * @param tag
      * @param image
@@ -62,7 +58,7 @@ public class SQLiteHelperTOPS extends SQLiteOpenHelper {
     }
 
     /**
-     *
+     *this method returns a cursor that is being asked in the sql command
      * @param sql
      * @return
      */
@@ -72,7 +68,7 @@ public class SQLiteHelperTOPS extends SQLiteOpenHelper {
     }
 
     /**
-     *
+     *this method returns the cursor position from the sql command passed through the param
      * @param sql
      * @return
      */
@@ -83,7 +79,7 @@ public class SQLiteHelperTOPS extends SQLiteOpenHelper {
 
 
     /**
-     *
+     * updates either name, tag, image of whatever id that is being passed into the parameter
      * @param name
      * @param tag
      * @param image
@@ -105,7 +101,7 @@ public class SQLiteHelperTOPS extends SQLiteOpenHelper {
     }
 
     /**
-     *
+     * this method delete the entire row of the id that is being passed in the parameter
      * @param id
      */
     public void deleteData(int id){

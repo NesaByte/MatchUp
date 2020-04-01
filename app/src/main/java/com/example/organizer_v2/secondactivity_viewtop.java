@@ -1,4 +1,5 @@
-/** This is a
+/** This activity lets user view the TOP values from the database
+ * the user can also VIEW, UPDATE, and DELETE the values from the database
  *    @author Nesa Bertanico
  *    @version 1.0
  */
@@ -40,9 +41,6 @@ import java.util.ArrayList;
 
 import static com.example.organizer_v2.MainActivity.sqLiteHelperTOPS;
 
-/**
- *
- */
 public class secondactivity_viewtop extends AppCompatActivity {
 
     private static final String TAG = "ListDataActivity";
@@ -57,7 +55,8 @@ public class secondactivity_viewtop extends AppCompatActivity {
     final int REQUEST_CODE_GALLERY = 888;
 
     /**
-     *
+     *upon opening this activity, the activity is designed to look like the activity_secondviewbottom.xml
+     * where the values are taken and displayed.
      * @param savedInstanceState
      */
     @Override
@@ -75,13 +74,32 @@ public class secondactivity_viewtop extends AppCompatActivity {
 
 
         sv_searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        /**
+         * this method makes a search query in this activity,
+         * it accepts user input and searches the database if the name exists
+         */
         sv_searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            /**
+             *this method accepts the user input,
+             * if it user types in a string and the string matches a name in the database,
+             *      the result will be passed into the adapter to be displayed into the screen
+             * @param query
+             * @return
+             */
             @Override
             public boolean onQueryTextSubmit(String query) {
                 mAdapter.getFilter().filter(query);
                 return false;
             }
 
+            /**
+             *this method accepts the user input while the text is being actively changed,
+             * if it user types in a string and the string matches a name in the database,
+             *      the result will be passed into the adapter to be displayed into the screen
+             * @param newText
+             * @return
+             */
             @Override
             public boolean onQueryTextChange(String newText) {
                 mAdapter.getFilter().filter(newText);
@@ -89,6 +107,9 @@ public class secondactivity_viewtop extends AppCompatActivity {
             }
         });
 
+        /**
+         *this cursor will go into the database and get all the values from the databases
+         */
         Cursor cursor = sqLiteHelperTOPS.getData("SELECT * FROM TABLE_NAME");
         mList.clear();
         while (cursor.moveToNext()) {
@@ -106,10 +127,20 @@ public class secondactivity_viewtop extends AppCompatActivity {
         }
 
 
+        /**
+         * upon long press of any item on the list, the user will be given 3 options:
+         * 1 - view details: opens a dialog box that shows the name, tag, image
+         * 2 - update: opens a dialog box that allows user to update name, tag, image of an existing item
+         * 3 - delate: deletes the item from the database
+         *
+         */
         lv_listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
             /**
-             *
+             * upon long press of any item on the list, the user will be given 3 options:
+             * 1 - view details: opens a dialog box that shows the name, tag, image
+             * 2 - update: opens a dialog box that allows user to update name, tag, image of an existing item
+             * 3 - delate: deletes the item from the database
              * @param parent
              * @param view
              * @param position
@@ -164,7 +195,9 @@ public class secondactivity_viewtop extends AppCompatActivity {
     }
 
     /**
-     *
+     *this method will go into the database using a Cursor and find the certain item
+     * by its position parameter,
+     * then a dilog box is will pop out with the name, tag, image of that position
      * @param activity
      * @param position
      */
@@ -208,6 +241,9 @@ public class secondactivity_viewtop extends AppCompatActivity {
     }
 
     /**
+     *this method will update the values of the certain position in the parameter
+     * first, it will use cursor to find the exact tuple
+     * then it will take in the value and allows user to change the existing value
      *
      * @param activity
      * @param position
@@ -251,7 +287,9 @@ public class secondactivity_viewtop extends AppCompatActivity {
             }
         });
 
-
+        /**
+         * this method will update the values of the database
+         */
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             /**
              *
@@ -279,7 +317,8 @@ public class secondactivity_viewtop extends AppCompatActivity {
 
 
     /**
-     *
+     *this method will find the position parameter which is the id
+     * then deletes the entire row from the database
      * @param position
      */
     private void showDialogDelete(final int position) {
@@ -309,7 +348,7 @@ public class secondactivity_viewtop extends AppCompatActivity {
     }
 
     /**
-     *
+     *this method updates the list of items to make sure that the user is able to view updatedd version of the database if changes are made
      */
     private void updateListData() {
         Cursor cursor = sqLiteHelperTOPS.getData("SELECT * FROM TABLE_NAME");
@@ -326,6 +365,10 @@ public class secondactivity_viewtop extends AppCompatActivity {
     }
 
     /**
+     *while updating the image, this method checks if application is given permission
+     *this methods checks if the user gave access to the application into the phone's storage
+     * if permission is granted, it will continue into the phone's storage
+     * if permission is denied, it will NOT go in the phone's storage. it will tell user that access was not granted
      *
      * @param requestCode
      * @param permissions
@@ -345,7 +388,8 @@ public class secondactivity_viewtop extends AppCompatActivity {
     }
 
     /**
-     *
+     *this method will lead the application into the phone's storage and get its content.
+     * it will only show any file with "image/*"
      */
     private void pickImageFromGallery() {
         Intent gallery = new Intent();
@@ -355,7 +399,13 @@ public class secondactivity_viewtop extends AppCompatActivity {
     }
 
     /**
-     *
+     *this method is called after the activity is called and received a result
+     * if the request code is 999, which means the user gave permission to this application to access it phone's storage
+     *      and the resultcode is RESULT_OK =
+     *          the image that will be selected in the phone can be cropped in a 1x1 ratio
+     * if the request code is matches with the CROP_IMAGE_ACTIVITY_REQUEST_CODE
+     *          the result of the crop will be assigned to the iv_photoB
+     * if request code is an error code, error message will appear
      * @param requestCode
      * @param resultCode
      * @param data
@@ -385,7 +435,7 @@ public class secondactivity_viewtop extends AppCompatActivity {
 
 
     /**
-     *
+     *this method makes it easier to use toast to output a message in the screen
      * @param msg
      */
     private void toastMsg(String msg){

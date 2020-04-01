@@ -1,4 +1,4 @@
-/** This is a
+/** This is an SQLHelper that helps the programmer to manipulate or take values from the BOTTOM database
  *    @author Nesa Bertanico
  *    @version 1.0
  */
@@ -12,12 +12,15 @@ import android.database.sqlite.SQLiteStatement;
 
 import androidx.annotation.Nullable;
 
-/**
- *
- */
 public class SQLiteHelperBOTTOMS extends SQLiteOpenHelper {
 
-
+    /**
+     * a constructor
+     * @param context
+     * @param name
+     * @param cursorFactory
+     * @param version
+     */
     SQLiteHelperBOTTOMS(@Nullable Context context,
                      String name,
                      SQLiteDatabase.CursorFactory cursorFactory,
@@ -26,7 +29,7 @@ public class SQLiteHelperBOTTOMS extends SQLiteOpenHelper {
     }
 
     /**
-     *
+     * accepts an string of SQL command to be executed and performed for the database
      * @param sql
      */
     public void queryDataB(String sql){
@@ -35,7 +38,7 @@ public class SQLiteHelperBOTTOMS extends SQLiteOpenHelper {
     }
 
     /**
-     *
+     * method inserts new row of data into the database
      * @param name
      * @param tag
      * @param image
@@ -53,7 +56,7 @@ public class SQLiteHelperBOTTOMS extends SQLiteOpenHelper {
     }
 
     /**
-     *
+     *this method returns a cursor that is being asked in the sql command
      * @param sql
      * @return
      */
@@ -63,13 +66,12 @@ public class SQLiteHelperBOTTOMS extends SQLiteOpenHelper {
     }
 
     /**
-     *
-      * @param name
+     * updates either name, tag, image of whatever id that is being passed into the parameter
+     * @param name
      * @param tag
      * @param image
      * @param id
      */
-//String name, String tag, byte[] image
     public void updateDataB(String name, String tag, byte[] image, int id){
         SQLiteDatabase db = getWritableDatabase();
         String sql = "UPDATE TABLE_NAME SET name = ?, tag = ?, image = ? WHERE id = ?";
@@ -85,7 +87,7 @@ public class SQLiteHelperBOTTOMS extends SQLiteOpenHelper {
     }
 
     /**
-     *
+     * this method delete the entire row of the id that is being passed in the parameter
      * @param id
      */
     public void deleteDataB(int id){
@@ -102,7 +104,7 @@ public class SQLiteHelperBOTTOMS extends SQLiteOpenHelper {
 
     /**
      *
-      * @param db
+     * @param db
      */
     @Override
     public void onCreate(SQLiteDatabase db) {

@@ -314,7 +314,8 @@ public class secondactivity_viewbottom extends AppCompatActivity {
     }
 
     /**
-     *this method will delete all
+     *this method will find the position parameter which is the id
+     * then deletes the entire row from the database
      * @param position
      */
     private void showDialogDelete(final int position) {
@@ -344,7 +345,7 @@ public class secondactivity_viewbottom extends AppCompatActivity {
     }
 
     /**
-     *
+     *this method updates the list of items to make sure that the user is able to view updatedd version of the database if changes are made
      */
     private void updateListData() {
         Cursor cursor = sqLiteHelperBOTTOMS.getDataB("SELECT * FROM TABLE_NAME");
@@ -361,6 +362,10 @@ public class secondactivity_viewbottom extends AppCompatActivity {
     }
 
     /**
+     * while updating the image, this method checks if application is given permission
+     *this methods checks if the user gave access to the application into the phone's storage
+     * if permission is granted, it will continue into the phone's storage
+     * if permission is denied, it will NOT go in the phone's storage. it will tell user that access was not granted
      *
      * @param requestCode
      * @param permissions
@@ -380,7 +385,8 @@ public class secondactivity_viewbottom extends AppCompatActivity {
     }
 
     /**
-     *
+     *this method will lead the application into the phone's storage and get its content.
+     * it will only show any file with "image/*"
      */
     private void pickImageFromGallery() {
         Intent gallery = new Intent();
@@ -390,7 +396,14 @@ public class secondactivity_viewbottom extends AppCompatActivity {
     }
 
     /**
-     *
+     *this method is called after the activity is called and received a result
+     * if the request code is 999, which means the user gave permission to this application to access it phone's storage
+     *      and the resultcode is RESULT_OK =
+     *          the image that will be selected in the phone can be cropped in a 1x1 ratio
+     * if the request code is matches with the CROP_IMAGE_ACTIVITY_REQUEST_CODE
+     *          the result of the crop will be assigned to the iv_photoB
+     * if request code is an error code, error message will appear
+
      * @param requestCode
      * @param resultCode
      * @param data
@@ -419,8 +432,9 @@ public class secondactivity_viewbottom extends AppCompatActivity {
     }
 
 
+
     /**
-     *
+     *this method makes it easier to use toast to output a message in the screen
      * @param msg
      */
     private void toastMsg(String msg){
