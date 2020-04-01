@@ -1,3 +1,8 @@
+/** This is a
+ *    @author Nesa Bertanico
+ *    @version 1.0
+ */
+
 package com.example.organizer_v2;
 
 import androidx.annotation.NonNull;
@@ -35,6 +40,9 @@ import java.util.ArrayList;
 
 import static com.example.organizer_v2.MainActivity.sqLiteHelperTOPS;
 
+/**
+ *
+ */
 public class secondactivity_viewtop extends AppCompatActivity {
 
     private static final String TAG = "ListDataActivity";
@@ -48,6 +56,10 @@ public class secondactivity_viewtop extends AppCompatActivity {
 
     final int REQUEST_CODE_GALLERY = 888;
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +107,15 @@ public class secondactivity_viewtop extends AppCompatActivity {
 
 
         lv_listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            /**
+             *
+             * @param parent
+             * @param view
+             * @param position
+             * @param id
+             * @return
+             */
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 final CharSequence[] items = {"View details", "Update top", "Delete top"};
@@ -142,6 +163,11 @@ public class secondactivity_viewtop extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * @param activity
+     * @param position
+     */
     private void showDialogRead(Activity activity, final int position) {
         final Dialog dialogRead = new Dialog(activity);
         dialogRead.setContentView(R.layout.dialog_viewtop_read);
@@ -181,6 +207,11 @@ public class secondactivity_viewtop extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * @param activity
+     * @param position
+     */
     private void showDialogUpdate(Activity activity, final int position) {
         final Dialog dialogUpdate = new Dialog(activity);
         dialogUpdate.setContentView(R.layout.dialog_viewtop_update);
@@ -220,7 +251,12 @@ public class secondactivity_viewtop extends AppCompatActivity {
             }
         });
 
+
         btnUpdate.setOnClickListener(new View.OnClickListener() {
+            /**
+             *
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 try {
@@ -242,6 +278,10 @@ public class secondactivity_viewtop extends AppCompatActivity {
     }
 
 
+    /**
+     *
+     * @param position
+     */
     private void showDialogDelete(final int position) {
         AlertDialog.Builder dialogDelete = new AlertDialog.Builder(secondactivity_viewtop.this);
         dialogDelete.setTitle("Deleting this top");
@@ -268,6 +308,9 @@ public class secondactivity_viewtop extends AppCompatActivity {
         dialogDelete.show();
     }
 
+    /**
+     *
+     */
     private void updateListData() {
         Cursor cursor = sqLiteHelperTOPS.getData("SELECT * FROM TABLE_NAME");
         mList.clear();
@@ -282,6 +325,12 @@ public class secondactivity_viewtop extends AppCompatActivity {
         mAdapter.notifyDataSetChanged();
     }
 
+    /**
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_CODE_GALLERY) {
@@ -295,6 +344,9 @@ public class secondactivity_viewtop extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
+    /**
+     *
+     */
     private void pickImageFromGallery() {
         Intent gallery = new Intent();
         gallery.setType("image/*");
@@ -302,6 +354,12 @@ public class secondactivity_viewtop extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(gallery, "Select Top Picture"), REQUEST_CODE_GALLERY);
     }
 
+    /**
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -326,7 +384,10 @@ public class secondactivity_viewtop extends AppCompatActivity {
     }
 
 
-
+    /**
+     *
+     * @param msg
+     */
     private void toastMsg(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }

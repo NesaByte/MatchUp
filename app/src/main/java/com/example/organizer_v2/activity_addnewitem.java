@@ -1,3 +1,10 @@
+/** This activity is invoked when the user whats to add a new item in to the inventory
+ * then the user will be asked if the he wants to add top or bottom by clicking on an image button
+ *
+ *    @author Nesa Bertanico
+ *    @version 1.0
+ */
+
 package com.example.organizer_v2;
 
 import androidx.annotation.Nullable;
@@ -14,9 +21,11 @@ public class activity_addnewitem extends AppCompatActivity {
 
     ImageButton ib_add_top, ib_add_bottom;
     EditText  et_name, et_tag;
-    //public static SQLiteHelperTOPS sqLiteHelperTOPS;
 
-
+    /**
+     * invoking this activity will create the fields specified below
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,71 +39,24 @@ public class activity_addnewitem extends AppCompatActivity {
         ib_add_top =     findViewById(R.id.ib_add_top);
         ib_add_bottom =  findViewById(R.id.ib_add_bottom);
 
-  /*      sqLiteHelperTOPS = new SQLiteHelperTOPS(this, "DB_TOPS.sqlite", null, 1);
 
-        sqLiteHelperTOPS.queryData("CREATE TABLE IF NOT EXISTS TABLE_NAME " +
-                "(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, tag VARCHAR, image BLOB)");
-*/
-
+        /**
+         * when image button is clicked, it will send the user to another activity to complete the adding of the top
+         */
         ib_add_top.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(activity_addnewitem.this, secondactivity_addtop.class));
             }
         });
-
+        /**
+         * when image button is clicked, it will send the user to another activity to complete the adding of the bottom
+         */
         ib_add_bottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(activity_addnewitem.this, secondactivity_addbottom.class));
             }
         });
-
-
     }
-
-
-/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
-
-            case R.id.btn_addNewItem:
-                break;
-
-            case R.id.btn_matchUp:
-                actionMatchUp();
-                break;
-
-            case R.id.btn_viewInventory:
-                actionViewInventory();
-                break;
-
-            case R.id.btn_removeItem:
-                actionRemoveItem();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void actionMatchUp(){
-        Intent i = new Intent(activity_addnewitem.this, activity_matchup.class);
-        startActivity(i);
-    }
-
-    private void actionViewInventory(){
-        Intent i = new Intent(activity_addnewitem.this, activity_viewinventory.class);
-        startActivity(i);
-    }
-
-    private void actionRemoveItem(){
-        Intent i = new Intent(activity_addnewitem.this, activity_removeitem.class);
-        startActivity(i);
-    }*/
 }

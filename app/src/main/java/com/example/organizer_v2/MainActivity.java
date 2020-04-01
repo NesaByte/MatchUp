@@ -1,3 +1,8 @@
+/** This is the Main Activity where the databses are created
+ * and pathways to different activities are held
+ *    @author Nesa Bertanico
+ *    @version 1.0
+ */
 package com.example.organizer_v2;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,12 +21,6 @@ import java.io.ByteArrayOutputStream;
 
 public class MainActivity extends AppCompatActivity{
 
-    //main menu = MATCH UP
-    /*private ImageView img;
-    private Button btn_matchUp;
-    private Button btn_viewInventory;
-    private Button btn_addNewItem;
-    private Button btn_removeItem;*/
     Button btn_viewInventory, btn_addNewItem, btn_matchUp, btn_viewMatchUp;
     ImageView img;
 
@@ -29,6 +28,10 @@ public class MainActivity extends AppCompatActivity{
     public static SQLiteHelperBOTTOMS sqLiteHelperBOTTOMS;
     public static SQLiteHelperMATCHUP sqLiteHelperMATCHUP;
 
+    /**
+     * initializing my activity as how the programmer wants it to look like.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +71,11 @@ public class MainActivity extends AppCompatActivity{
     fixmatch();
 
 
-
+        /**
+         *Interface definition for a callback to be invoked when a view is clicked.
+         * when view button is clicked, it will send the user to another activity to view top or bottom
+         *
+         */
         btn_viewInventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +83,11 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        /**
+         *Interface definition for a callback to be invoked when a view is clicked.
+         * when add button is clicked, it will send the user to another activity to add top or bottom
+         *
+         */
         btn_addNewItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +96,10 @@ public class MainActivity extends AppCompatActivity{
         });
 
 
+        /**
+         *Interface definition for a callback to be invoked when a view is clicked.
+         * when matchup button is clicked, it will send the user to another activity to match a top with a bottom
+         */
         btn_matchUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,16 +107,25 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        /**
+         *Interface definition for a callback to be invoked when a view is clicked.
+         * when view matchup button is clicked, it will send the user to another activity to view paired tops and bottoms
+         */
         btn_viewMatchUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, activity_viewmatchup.class));
             }
         });
-
-
     }
 
+    /**
+     *this method accepts an image, then the image is being converted into a bitmap
+     * then the bitmap is written into a byte array to be retrieved as a full image easily
+     * then it is being compressed to save storage space
+     * @param image
+     * @return
+     */
     public static byte[] imageViewToByte(ImageView image){
         Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -109,6 +134,9 @@ public class MainActivity extends AppCompatActivity{
         return byteArr;
     }
 
+    /**
+     * this method is to fix the match database, to remove empty mstches
+     */
     public static void fixmatch(){
         Cursor cursor = sqLiteHelperMATCHUP.getDataM(
                 "SELECT * FROM DB_MATCHED");
@@ -129,30 +157,4 @@ public class MainActivity extends AppCompatActivity{
             }
         }
     }
-/*
-    @Override
-    public void onClick(View v){
-        switch (v.getId()){
-            case R.id.btn_addNewItem:
-                startActivity(new Intent(this, activity_addnewitem.class));
-                break;
-
-            case R.id.btn_matchUp:
-                startActivity(new Intent(this, activity_matchup.class));
-                break;
-
-            case R.id.btn_removeItem:
-                startActivity(new Intent(this, activity_removeitem.class));
-                break;
-
-            case R.id.btn_viewInventory:
-                startActivity(new Intent(this, activity_viewinventory.class));
-                break;
-        }
-    }
-*/
-private void toastMsg(String msg){
-    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-}
-
 }

@@ -1,3 +1,9 @@
+/** This activity is invoked when the user whats to view all items in to the inventory
+ * then the user will be asked if the he wants to view top or bottom by clicking on an image button
+ *
+ *    @author Nesa Bertanico
+ *    @version 1.0
+ */
 package com.example.organizer_v2;
 
 import androidx.annotation.Nullable;
@@ -11,28 +17,37 @@ import android.widget.ImageButton;
 public class activity_viewinventory extends AppCompatActivity {
 
     ImageButton ib_view_top, ib_view_bottom;
-    //EditText et_view_name, et_view_tag;
 
-
+    /**
+     * overrided the oncreate method to make the activity look like how the programmer wants it to be.
+     * fields are specified below
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewinventory);
 
-        getSupportActionBar().setTitle("Add New Item");
+        getSupportActionBar().setTitle("Viewing Inventory");
 
-        //et_view_name =    (EditText) findViewById(R.id.et_view_name);
-        //et_view_tag  =    (EditText) findViewById(R.id.et_view_tag);
 
         ib_view_top =     findViewById(R.id.ib_view_top);
         ib_view_bottom =  findViewById(R.id.ib_view_bottom);
 
+        /**
+         * when image button is clicked, it will send the user to another activity to view all top
+         */
         ib_view_top.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(activity_viewinventory.this, secondactivity_viewtop.class));
             }
         });
+
+        /**
+         * when image button is clicked, it will send the user to another activity to view all bottom
+         */
         ib_view_bottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,51 +55,4 @@ public class activity_viewinventory extends AppCompatActivity {
             }
         });
     }
-
-
-
-/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
-
-
-            case R.id.btn_viewInventory:
-                break;
-
-            case R.id.btn_addNewItem:
-                actionAddNewItem();
-                break;
-
-            case R.id.btn_matchUp:
-                actionMatchUp();
-                break;
-
-            case R.id.btn_removeItem:
-                actionRemoveItem();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void actionMatchUp(){
-        Intent i = new Intent(activity_viewinventory.this, activity_matchup.class);
-        startActivity(i);
-    }
-
-    private void actionAddNewItem(){
-        Intent i = new Intent(activity_viewinventory.this, activity_addnewitem.class);
-        startActivity(i);
-    }
-
-    private void actionRemoveItem(){
-        Intent i = new Intent(activity_viewinventory.this, activity_removeitem.class);
-        startActivity(i);
-    }*/
 }

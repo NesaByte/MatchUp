@@ -1,3 +1,8 @@
+/** This adapter is very useful to contain all the values of top or bottom into an object to be displayed in a row
+ *
+ *    @author Nesa Bertanico
+ *    @version 1.0
+ */
 package com.example.organizer_v2;
 
 import android.content.Context;
@@ -24,7 +29,12 @@ public class adapter_viewtop extends BaseAdapter implements Filterable {
     ArrayList<Model> mValue;
     ValueFilter valueFilter;
 
-
+    /**
+     * a constructor for this adaptor to accept:
+     * @param context - accept the context
+     * @param layout - number of how many objects to be created
+     * @param list - put the objects into an arraylist of model to be displayed later
+     */
     public adapter_viewtop(Context context, int layout, ArrayList<Model> list) {
         this.context = context;
         this.layout = layout;
@@ -33,23 +43,52 @@ public class adapter_viewtop extends BaseAdapter implements Filterable {
         mValue = list;
     }
 
+    /**
+     * method to count the size of the list
+     * @return
+     */
     @Override
     public int getCount(){return list.size();}
 
+    /**
+     * method to get the certain object of whatever position
+     * @param position
+     * @return
+     */
     @Override
     public Object getItem(int position) {
         return list.get(position);
     }
 
+    /**
+     * method to get the certain id
+     * @param position
+     * @return
+     */
     @Override
     public long getItemId(int position) {
         return position;
     }
 
+    /**
+     * class that holds name, tag, and photo of each object
+     *
+     */
     private class ViewHolder{
         TextView tv_name, tv_tag;
         ImageView iv_photo;
     }
+
+    /**
+     * method that overrides the getView
+     * this method displays the  object's value in each layout.
+     * each row consists of name, tag, and its image
+     *
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -79,6 +118,10 @@ public class adapter_viewtop extends BaseAdapter implements Filterable {
         return row;
     }
 
+    /**
+     * overrides the method getfilter to help my code show ONLY the filter that is searched
+     * @return
+     */
     @Override
     public Filter getFilter() {
         if (valueFilter == null) {
@@ -87,7 +130,16 @@ public class adapter_viewtop extends BaseAdapter implements Filterable {
         return valueFilter;
     }
 
+    /**
+     * this method enables to add multiple row according to what is being searched
+     * each row contains the values of the arraylist(model) and is displayed
+     */
     private class ValueFilter extends Filter {
+        /**
+         * Invoked in a worker thread to filter the data according to the constraint.
+         * @param constraint
+         * @return
+         */
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
@@ -109,6 +161,11 @@ public class adapter_viewtop extends BaseAdapter implements Filterable {
             return results;
         }
 
+        /**
+         * this method Invoked in the UI thread to publish the filtering results in the user interface.
+         * @param constraint
+         * @param results
+         */
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             list = (ArrayList<Model>) results.values;

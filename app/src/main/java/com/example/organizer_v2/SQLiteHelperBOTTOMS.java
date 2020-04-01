@@ -1,3 +1,7 @@
+/** This is a
+ *    @author Nesa Bertanico
+ *    @version 1.0
+ */
 package com.example.organizer_v2;
 
 import android.content.Context;
@@ -8,9 +12,11 @@ import android.database.sqlite.SQLiteStatement;
 
 import androidx.annotation.Nullable;
 
+/**
+ *
+ */
 public class SQLiteHelperBOTTOMS extends SQLiteOpenHelper {
 
-    private static final String TAG = "SQLiteHelperBOTTOMS";
 
     SQLiteHelperBOTTOMS(@Nullable Context context,
                      String name,
@@ -19,11 +25,21 @@ public class SQLiteHelperBOTTOMS extends SQLiteOpenHelper {
         super(context, name, cursorFactory, version);
     }
 
+    /**
+     *
+     * @param sql
+     */
     public void queryDataB(String sql){
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL(sql);
     }
 
+    /**
+     *
+     * @param name
+     * @param tag
+     * @param image
+     */
     public void insertDataB(String name, String tag, byte[] image){
         SQLiteDatabase db = getWritableDatabase();
         String sql = "INSERT INTO TABLE_NAME VALUES(NULL, ?, ?, ?)";
@@ -36,11 +52,24 @@ public class SQLiteHelperBOTTOMS extends SQLiteOpenHelper {
         sqLiteStatement.executeInsert();
     }
 
+    /**
+     *
+     * @param sql
+     * @return
+     */
     public Cursor getDataB(String sql) {
         SQLiteDatabase db = getReadableDatabase();
         return db.rawQuery(sql, null);
     }
-                          //String name, String tag, byte[] image
+
+    /**
+     *
+      * @param name
+     * @param tag
+     * @param image
+     * @param id
+     */
+//String name, String tag, byte[] image
     public void updateDataB(String name, String tag, byte[] image, int id){
         SQLiteDatabase db = getWritableDatabase();
         String sql = "UPDATE TABLE_NAME SET name = ?, tag = ?, image = ? WHERE id = ?";
@@ -55,6 +84,10 @@ public class SQLiteHelperBOTTOMS extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     *
+     * @param id
+     */
     public void deleteDataB(int id){
         SQLiteDatabase db = getWritableDatabase();
         String sql = "DELETE FROM TABLE_NAME WHERE id = ?";
@@ -67,10 +100,20 @@ public class SQLiteHelperBOTTOMS extends SQLiteOpenHelper {
     }
 
 
+    /**
+     *
+      * @param db
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
     }
 
+    /**
+     *
+     * @param db
+     * @param oldVersion
+     * @param newVersion
+     */
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
     }
 
